@@ -1,0 +1,1404 @@
+fileFormatVersion: 2
+guid: dab4d6797e41dc542ba87f2afecaa5cd
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -873142439449690540
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_0
+  - first:
+      213: 4255013586436099826
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_1
+  - first:
+      213: -6717286167096204212
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_2
+  - first:
+      213: -1257862742055590748
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_3
+  - first:
+      213: 7418723178093777988
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_4
+  - first:
+      213: 1754473895258195807
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_5
+  - first:
+      213: 4329616197577727499
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_6
+  - first:
+      213: 5085775496352594978
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_7
+  - first:
+      213: -4081449213169012762
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_8
+  - first:
+      213: 7936144608621203991
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_9
+  - first:
+      213: 840122164929387370
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_10
+  - first:
+      213: 7395286427318055003
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_11
+  - first:
+      213: -599399615267225821
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_12
+  - first:
+      213: 4475609034158847109
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_13
+  - first:
+      213: -3377064116126286065
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_14
+  - first:
+      213: -7411687299765016977
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_15
+  - first:
+      213: -7143003479205768941
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_16
+  - first:
+      213: -922560372293863224
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_17
+  - first:
+      213: 3455886436704186522
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_18
+  - first:
+      213: 4140812567794002932
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_19
+  - first:
+      213: -6440394728959941998
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_20
+  - first:
+      213: -6365987420677868916
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_21
+  - first:
+      213: -3624803405981906627
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_22
+  - first:
+      213: 636198734213809761
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_23
+  - first:
+      213: 413872814325108897
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_24
+  - first:
+      213: -2771030698814210267
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_25
+  - first:
+      213: -5243875559204670980
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_26
+  - first:
+      213: 7844218365488348882
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_27
+  - first:
+      213: -4497111715926964050
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_28
+  - first:
+      213: -91101818837085315
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_29
+  - first:
+      213: -96173286037426387
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_30
+  - first:
+      213: -1454735995360798527
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_31
+  - first:
+      213: -1620648391217488189
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_32
+  - first:
+      213: -6741740156712487831
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_33
+  - first:
+      213: -8483562575376529554
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_34
+  - first:
+      213: -6890898442292487207
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_35
+  - first:
+      213: 6881179655082928931
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_36
+  - first:
+      213: 441864069008129085
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_37
+  - first:
+      213: 3243308120565661952
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_38
+  - first:
+      213: 5219371745344355172
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_39
+  - first:
+      213: 653297253387487727
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_40
+  - first:
+      213: 6918574500908526203
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_41
+  - first:
+      213: -4656528745015988260
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_42
+  - first:
+      213: -2574720625653491112
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_43
+  - first:
+      213: -4469390696868823662
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_44
+  - first:
+      213: 5100868324407093153
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_45
+  - first:
+      213: 1198486089234312833
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_46
+  - first:
+      213: -8140180808543624553
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_47
+  - first:
+      213: 4744332083246356767
+    second: _sonia__A_set_of_pixel_art_elements_f6 (1)_48
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 90
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_0
+      rect:
+        serializedVersion: 2
+        x: 642
+        y: 486
+        width: 894
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45e7842d399f1e3f0800000000000000
+      internalID: -873142439449690540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_1
+      rect:
+        serializedVersion: 2
+        x: 664
+        y: 310
+        width: 69
+        height: 150
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2fe0cf51058dc0b30800000000000000
+      internalID: 4255013586436099826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_2
+      rect:
+        serializedVersion: 2
+        x: 756
+        y: 310
+        width: 71
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c44e59b12d767c2a0800000000000000
+      internalID: -6717286167096204212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_3
+      rect:
+        serializedVersion: 2
+        x: 841
+        y: 310
+        width: 67
+        height: 151
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a4e393208c2b8ee0800000000000000
+      internalID: -1257862742055590748
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_4
+      rect:
+        serializedVersion: 2
+        x: 923
+        y: 310
+        width: 52
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4449c35ac6994f660800000000000000
+      internalID: 7418723178093777988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_5
+      rect:
+        serializedVersion: 2
+        x: 988
+        y: 310
+        width: 52
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f578f8e46b4295810800000000000000
+      internalID: 1754473895258195807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_6
+      rect:
+        serializedVersion: 2
+        x: 1063
+        y: 310
+        width: 72
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0ed56e0ef2e51c30800000000000000
+      internalID: 4329616197577727499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_7
+      rect:
+        serializedVersion: 2
+        x: 1144
+        y: 310
+        width: 38
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22c7b7b4edd449640800000000000000
+      internalID: 5085775496352594978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_8
+      rect:
+        serializedVersion: 2
+        x: 1192
+        y: 310
+        width: 39
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ef6348a097cb57c0800000000000000
+      internalID: -4081449213169012762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_9
+      rect:
+        serializedVersion: 2
+        x: 658
+        y: 246
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7129ffa5979d22e60800000000000000
+      internalID: 7936144608621203991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_10
+      rect:
+        serializedVersion: 2
+        x: 722
+        y: 278
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6b5c8868a6b8ab00800000000000000
+      internalID: 840122164929387370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_11
+      rect:
+        serializedVersion: 2
+        x: 754
+        y: 278
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b507f80e2d551a660800000000000000
+      internalID: 7395286427318055003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_12
+      rect:
+        serializedVersion: 2
+        x: 853
+        y: 262
+        width: 27
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32fbd75c9318ea7f0800000000000000
+      internalID: -599399615267225821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_13
+      rect:
+        serializedVersion: 2
+        x: 916
+        y: 262
+        width: 25
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 584319a24be8c1e30800000000000000
+      internalID: 4475609034158847109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_14
+      rect:
+        serializedVersion: 2
+        x: 951
+        y: 262
+        width: 25
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0ff29e24124221d0800000000000000
+      internalID: -3377064116126286065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_15
+      rect:
+        serializedVersion: 2
+        x: 981
+        y: 262
+        width: 25
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f666b3f6ba5642990800000000000000
+      internalID: -7411687299765016977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_16
+      rect:
+        serializedVersion: 2
+        x: 1011
+        y: 262
+        width: 32
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3119f805e24fedc90800000000000000
+      internalID: -7143003479205768941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_17
+      rect:
+        serializedVersion: 2
+        x: 1043
+        y: 262
+        width: 31
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c87295ba386233f0800000000000000
+      internalID: -922560372293863224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_18
+      rect:
+        serializedVersion: 2
+        x: 1074
+        y: 262
+        width: 16
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a90f7d37766c5ff20800000000000000
+      internalID: 3455886436704186522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_19
+      rect:
+        serializedVersion: 2
+        x: 1090
+        y: 262
+        width: 15
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4fba5d8671f177930800000000000000
+      internalID: 4140812567794002932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_20
+      rect:
+        serializedVersion: 2
+        x: 1114
+        y: 262
+        width: 20
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2926b0fdd1f1f96a0800000000000000
+      internalID: -6440394728959941998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_21
+      rect:
+        serializedVersion: 2
+        x: 1144
+        y: 262
+        width: 20
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c82f3e95b2877a7a0800000000000000
+      internalID: -6365987420677868916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_22
+      rect:
+        serializedVersion: 2
+        x: 722
+        y: 246
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3982ddd18c12bdc0800000000000000
+      internalID: -3624803405981906627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_23
+      rect:
+        serializedVersion: 2
+        x: 754
+        y: 246
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1660e57c06b34d800800000000000000
+      internalID: 636198734213809761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_24
+      rect:
+        serializedVersion: 2
+        x: 790
+        y: 262
+        width: 27
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a01a00c12f5eb500800000000000000
+      internalID: 413872814325108897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_25
+      rect:
+        serializedVersion: 2
+        x: 821
+        y: 262
+        width: 27
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52ff97fc2425b89d0800000000000000
+      internalID: -2771030698814210267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_26
+      rect:
+        serializedVersion: 2
+        x: 890
+        y: 262
+        width: 17
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf1b04f46f20a37b0800000000000000
+      internalID: -5243875559204670980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_27
+      rect:
+        serializedVersion: 2
+        x: 658
+        y: 182
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2de378ffa034cdc60800000000000000
+      internalID: 7844218365488348882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_28
+      rect:
+        serializedVersion: 2
+        x: 722
+        y: 214
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea80de898bc0791c0800000000000000
+      internalID: -4497111715926964050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_29
+      rect:
+        serializedVersion: 2
+        x: 754
+        y: 214
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d73d2d1e0675cbef0800000000000000
+      internalID: -91101818837085315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_30
+      rect:
+        serializedVersion: 2
+        x: 786
+        y: 198
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2f6bd8e7e25aaef0800000000000000
+      internalID: -96173286037426387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_31
+      rect:
+        serializedVersion: 2
+        x: 850
+        y: 230
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c89b8ad15dbfcbe0800000000000000
+      internalID: -1454735995360798527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_32
+      rect:
+        serializedVersion: 2
+        x: 882
+        y: 230
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ce5cafefdc4289e0800000000000000
+      internalID: -1620648391217488189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_33
+      rect:
+        serializedVersion: 2
+        x: 916
+        y: 230
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9647a27fb078072a0800000000000000
+      internalID: -6741740156712487831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_34
+      rect:
+        serializedVersion: 2
+        x: 938
+        y: 230
+        width: 35
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6742e819c4544a80800000000000000
+      internalID: -8483562575376529554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_35
+      rect:
+        serializedVersion: 2
+        x: 850
+        y: 198
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9db1dd3506c9e50a0800000000000000
+      internalID: -6890898442292487207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_36
+      rect:
+        serializedVersion: 2
+        x: 882
+        y: 198
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32becd0307cde7f50800000000000000
+      internalID: 6881179655082928931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_37
+      rect:
+        serializedVersion: 2
+        x: 917
+        y: 214
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3cfc389701d12600800000000000000
+      internalID: 441864069008129085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_38
+      rect:
+        serializedVersion: 2
+        x: 922
+        y: 214
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 001c4774d8b820d20800000000000000
+      internalID: 3243308120565661952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_39
+      rect:
+        serializedVersion: 2
+        x: 932
+        y: 214
+        width: 14
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46bf5ffe2feee6840800000000000000
+      internalID: 5219371745344355172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_40
+      rect:
+        serializedVersion: 2
+        x: 948
+        y: 214
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe946e0046af01900800000000000000
+      internalID: 653297253387487727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_41
+      rect:
+        serializedVersion: 2
+        x: 965
+        y: 198
+        width: 11
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7a6ab63ad6b30060800000000000000
+      internalID: 6918574500908526203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_42
+      rect:
+        serializedVersion: 2
+        x: 722
+        y: 150
+        width: 18
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cdf2dea17cfa06fb0800000000000000
+      internalID: -4656528745015988260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_43
+      rect:
+        serializedVersion: 2
+        x: 754
+        y: 182
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85a5d008b31c44cd0800000000000000
+      internalID: -2574720625653491112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_44
+      rect:
+        serializedVersion: 2
+        x: 916
+        y: 198
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29db2be47d889f1c0800000000000000
+      internalID: -4469390696868823662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_45
+      rect:
+        serializedVersion: 2
+        x: 933
+        y: 198
+        width: 25
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a7a35a27bce9c640800000000000000
+      internalID: 5100868324407093153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_46
+      rect:
+        serializedVersion: 2
+        x: 972
+        y: 198
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18eee019fb0e1a010800000000000000
+      internalID: 1198486089234312833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_47
+      rect:
+        serializedVersion: 2
+        x: 658
+        y: 134
+        width: 50
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7922e43eea4480f80800000000000000
+      internalID: -8140180808543624553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _sonia__A_set_of_pixel_art_elements_f6 (1)_48
+      rect:
+        serializedVersion: 2
+        x: 916
+        y: 166
+        width: 93
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f195366a4e047d140800000000000000
+      internalID: 4744332083246356767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_0: -873142439449690540
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_1: 4255013586436099826
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_10: 840122164929387370
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_11: 7395286427318055003
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_12: -599399615267225821
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_13: 4475609034158847109
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_14: -3377064116126286065
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_15: -7411687299765016977
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_16: -7143003479205768941
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_17: -922560372293863224
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_18: 3455886436704186522
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_19: 4140812567794002932
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_2: -6717286167096204212
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_20: -6440394728959941998
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_21: -6365987420677868916
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_22: -3624803405981906627
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_23: 636198734213809761
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_24: 413872814325108897
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_25: -2771030698814210267
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_26: -5243875559204670980
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_27: 7844218365488348882
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_28: -4497111715926964050
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_29: -91101818837085315
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_3: -1257862742055590748
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_30: -96173286037426387
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_31: -1454735995360798527
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_32: -1620648391217488189
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_33: -6741740156712487831
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_34: -8483562575376529554
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_35: -6890898442292487207
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_36: 6881179655082928931
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_37: 441864069008129085
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_38: 3243308120565661952
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_39: 5219371745344355172
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_4: 7418723178093777988
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_40: 653297253387487727
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_41: 6918574500908526203
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_42: -4656528745015988260
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_43: -2574720625653491112
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_44: -4469390696868823662
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_45: 5100868324407093153
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_46: 1198486089234312833
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_47: -8140180808543624553
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_48: 4744332083246356767
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_5: 1754473895258195807
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_6: 4329616197577727499
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_7: 5085775496352594978
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_8: -4081449213169012762
+      _sonia__A_set_of_pixel_art_elements_f6 (1)_9: 7936144608621203991
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

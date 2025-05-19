@@ -222,7 +222,11 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      night_Clouds_0: 6741125629958975383
+      night_Clouds_1: -1641181673419053747
+      night_Clouds_2: 2892875365257925509
+      night_Clouds_3: -7163224575833191847
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

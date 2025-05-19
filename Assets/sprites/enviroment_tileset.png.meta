@@ -1672,7 +1672,69 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      enviroment_tileset_0: 1053263894394051806
+      enviroment_tileset_1: -1488888048823696756
+      enviroment_tileset_10: -2578158391104278275
+      enviroment_tileset_11: 7809633634645681005
+      enviroment_tileset_12: 8534917255677368179
+      enviroment_tileset_13: -560424063483092598
+      enviroment_tileset_14: -8172621692161166310
+      enviroment_tileset_15: -2570660411448756953
+      enviroment_tileset_16: -8107451042426528174
+      enviroment_tileset_17: 8636397081793281600
+      enviroment_tileset_18: -84430796385309170
+      enviroment_tileset_19: 605992209777278779
+      enviroment_tileset_2: 7303710892670447447
+      enviroment_tileset_20: -8173695893931461216
+      enviroment_tileset_21: -1254308526480278047
+      enviroment_tileset_22: -3027681132711604544
+      enviroment_tileset_23: -3085404558592666198
+      enviroment_tileset_24: 2137251888878991251
+      enviroment_tileset_25: 1410317252725609361
+      enviroment_tileset_26: 6365169002811021107
+      enviroment_tileset_27: 6301394577109639189
+      enviroment_tileset_28: -8115336329968283879
+      enviroment_tileset_29: 4058257804734754641
+      enviroment_tileset_3: 1537278060524684183
+      enviroment_tileset_30: 7479620775537154603
+      enviroment_tileset_31: 735552607149262145
+      enviroment_tileset_32: 4188305508812045039
+      enviroment_tileset_33: 6018918326293699144
+      enviroment_tileset_34: -493336893474752352
+      enviroment_tileset_35: -5649866218012175342
+      enviroment_tileset_36: -7270040540249461954
+      enviroment_tileset_37: -2501237437486453774
+      enviroment_tileset_38: -2769196417488626956
+      enviroment_tileset_39: 5085481260529651307
+      enviroment_tileset_4: -4138494670211728348
+      enviroment_tileset_40: -4902443297373100036
+      enviroment_tileset_41: 926039069313750332
+      enviroment_tileset_42: -3711851392414452222
+      enviroment_tileset_43: -5834490407099312045
+      enviroment_tileset_44: 3308014329414255723
+      enviroment_tileset_45: 2354087490769040329
+      enviroment_tileset_46: -4695322853530185356
+      enviroment_tileset_47: -8823936961006269942
+      enviroment_tileset_48: -3310804011888787854
+      enviroment_tileset_49: 2182622836666345605
+      enviroment_tileset_5: -7524052891719153231
+      enviroment_tileset_50: 1094209269567932002
+      enviroment_tileset_51: 6439808747608171756
+      enviroment_tileset_52: -1282461204880813533
+      enviroment_tileset_53: 6761640484316613622
+      enviroment_tileset_54: -5102297142351109212
+      enviroment_tileset_55: 9203968045110906668
+      enviroment_tileset_56: -7367291936645238729
+      enviroment_tileset_57: -2347771006165175819
+      enviroment_tileset_58: 8287222314618982655
+      enviroment_tileset_59: 1422854903773047408
+      enviroment_tileset_6: 1088205578599775493
+      enviroment_tileset_60: -8680663624521441908
+      enviroment_tileset_61: 5176617279042282903
+      enviroment_tileset_7: -625551175850614905
+      enviroment_tileset_8: 625514113682879158
+      enviroment_tileset_9: -4193010720137020618
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

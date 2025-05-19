@@ -297,7 +297,14 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      yellowish_props_0: 6271518519755132377
+      yellowish_props_1: -5151428907953108980
+      yellowish_props_2: -6049204066946211675
+      yellowish_props_3: 1029639888389591961
+      yellowish_props_4: -2412534291393224271
+      yellowish_props_5: 2867508389684886398
+      yellowish_props_6: -7710510428811473143
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

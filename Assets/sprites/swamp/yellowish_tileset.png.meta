@@ -597,7 +597,26 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      yellowish_tileset_0: -3230137548046907342
+      yellowish_tileset_1: 7970773241053620763
+      yellowish_tileset_10: -9155672937791424228
+      yellowish_tileset_11: 7988233514618900442
+      yellowish_tileset_12: 6350364042911314629
+      yellowish_tileset_13: -6663354406252206108
+      yellowish_tileset_14: 1404767643840591671
+      yellowish_tileset_15: 9130631113261311957
+      yellowish_tileset_16: 7855187332308722557
+      yellowish_tileset_17: -5200271064955449046
+      yellowish_tileset_18: 7451954228635360287
+      yellowish_tileset_2: 1889195305946176441
+      yellowish_tileset_3: 3962081455012284542
+      yellowish_tileset_4: 6796003632802124328
+      yellowish_tileset_5: -4312164756682895330
+      yellowish_tileset_6: -2570818480861412763
+      yellowish_tileset_7: 4450724841720660167
+      yellowish_tileset_8: 6737456191149529562
+      yellowish_tileset_9: -2040920317689534720
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

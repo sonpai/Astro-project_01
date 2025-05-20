@@ -2,13 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class player_movment : MonoBehaviour
 {
+    public GameObject interactionText;
     public Rigidbody2D rb;
     [Header("Movment")]
     public float moveSpeed = 5f;
     float horizontalMovement;
+
 
     [Header("Jumping")]
     public float jumpPower = 3f;
@@ -87,4 +91,33 @@ public class player_movment : MonoBehaviour
             Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
         }
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        // Check if the player is near the blacksmith
+        if (other.CompareTag("Blacksmith"))
+        {
+            interactionText.SetActive(true);
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        // Hide the interaction text when leaving the blacksmith area
+        if (other.CompareTag("Blacksmith"))
+        {
+            interactionText.SetActive(false); // Hide the interaction text
+        }
+    }
+    public void Interact(InputAction.CallbackContext context)
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        //if (context.performed)
+
+        {
+            SceneManager.LoadScene("shop"); // Transition to the shop scene
+        }
+    }
+
+   
 }

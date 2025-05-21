@@ -5,24 +5,58 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+/// <summary>
+/// Represents the player character in the game.
+/// Manages player movement, jumping, interactions, and scene transitions.
+/// </summary>
 public class player_movment : MonoBehaviour
 {
-    public GameObject interactionText;
-    public Rigidbody2D rb;
-    [Header("Movment")]
-    public float moveSpeed = 5f;
-    float horizontalMovement;
+    [SerializeField] private float interactionRadius = 1.5f;
+    [SerializeField] private LayerMask interactableLayer;
+    [SerializeField] private GameObject interactionText;
+    [SerializeField] private Rigidbody2D rb;
 
+    [Header("Movement")]
+    [SerializeField] private float moveSpeed = 5f;
+    private float horizontalMovement;
 
     [Header("Jumping")]
-    public float jumpPower = 3f;
-    private int jumpCount = 0; // Track the number of jumps
-    private bool isGrounded = false; // Check if the player is on the ground
-    public Transform groundCheck; // A position to check for ground (empty GameObject under the Player)
-    public float groundCheckRadius = 0.2f; // Radius of the ground check circle
-    public LayerMask groundLayer; // Layer for the Platforms
+    [SerializeField] private float jumpPower = 3f;
+    private int jumpCount = 0; // Tracks the number of jumps performed
+    private bool isGrounded = false; // Determines if the player is on the ground
+    [SerializeField] private Transform groundCheck; // Position used to check for ground collisions
+    [SerializeField] private float groundCheckRadius = 0.2f; // Radius of the ground-check sphere
+    [SerializeField] private LayerMask groundLayer; // Layer mask used to identify ground objects
 
+    /// <summary>
+    /// Gets or sets the player's movement speed.
+    /// </summary>
+    public float MoveSpeed
+    {
+        get { return moveSpeed; }
+        set { moveSpeed = Mathf.Max(0, value); } // Ensures speed is non-negative
+    }
 
+    /// <summary>
+    /// Gets or sets the player's jump power.
+    /// </summary>
+    public float JumpPower
+    {
+        get { return jumpPower; }
+        set { jumpPower = Mathf.Max(0, value); } // Ensures jump power is non-negative
+    }
+
+    /// <summary>
+    /// Gets whether the player is grounded.
+    /// </summary>
+    public bool IsGrounded
+    {
+        get { return isGrounded; }
+    }
+
+    /// <summary>
+    /// Initializes necessary components and checks for required assignments.
+    /// </summary>
     void Start()
     {
         // Ensure the Rigidbody2D is assigned
@@ -38,6 +72,9 @@ public class player_movment : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Updates player movement and checks if the player is grounded.
+    /// </summary>
     void Update()
     {
         // Apply horizontal movement
@@ -47,12 +84,15 @@ public class player_movment : MonoBehaviour
         CheckIfGrounded();
     }
 
+    /// <summary>
+    /// Checks whether the player is currently on the ground.
+    /// Resets the jump count when grounded.
+    /// </summary>
     void CheckIfGrounded()
     {
         if (groundCheck == null) return; // Avoid errors if groundCheck is not assigned
 
-        // Use Physics2D.OverlapCircle to check if the Player is touching the Platforms
-        //isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        // Perform a raycast to detect ground
         RaycastHit2D hit = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckRadius, groundLayer);
         isGrounded = hit.collider != null;
 
@@ -63,26 +103,32 @@ public class player_movment : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// Handles player movement based on input.
+    /// </summary>
+    /// <param name="context">The input context containing movement data.</param>
     public void Move(InputAction.CallbackContext context)
     {
-        horizontalMovement = context.ReadValue<Vector2>().x; // Now this matches the declared variable
+        horizontalMovement = context.ReadValue<Vector2>().x; // Update horizontal movement value
     }
 
+    /// <summary>
+    /// Handles player jumping based on input.
+    /// </summary>
+    /// <param name="context">The input context containing jump data.</param>
     public void Jump(InputAction.CallbackContext context)
     {
         // Only jump when the input is performed (e.g., space key is pressed)
         if (context.performed)
         {
-            // Allow a jump if the Player is grounded or has only jumped once (double jump)
-          //  if (isGrounded || jumpCount < 2)
-          //  {
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower); // Apply jump force
-             //   jumpCount++; // Increment jump count
-             
-          //  }
+            // Apply jump force
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
         }
     }
+
+    /// <summary>
+    /// Draws a visual representation of the ground check area in the editor.
+    /// </summary>
     void OnDrawGizmos()
     {
         if (groundCheck != null)
@@ -92,32 +138,58 @@ public class player_movment : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Handles player interaction when entering a trigger collider.
+    /// </summary>
+    /// <param name="other">The collider of the object the player interacted with.</param>
     void OnTriggerEnter(Collider other)
     {
-        // Check if the player is near the blacksmith
-        if (other.CompareTag("Blacksmith"))
+        if (other.CompareTag("blacksmith"))
         {
             interactionText.SetActive(true);
         }
     }
 
+    /// <summary>
+    /// Handles player interaction when exiting a trigger collider.
+    /// </summary>
+    /// <param name="other">The collider of the object the player exited.</param>
     void OnTriggerExit(Collider other)
     {
-        // Hide the interaction text when leaving the blacksmith area
-        if (other.CompareTag("Blacksmith"))
+        if (other.CompareTag("blacksmith"))
         {
-            interactionText.SetActive(false); // Hide the interaction text
+            interactionText.SetActive(false);
         }
     }
+
+    /// <summary>
+    /// Handles interaction input and checks for nearby interactable objects.
+    /// Transitions to a new scene if interacting with a blacksmith.
+    /// </summary>
+    /// <param name="context">The input context containing interaction data.</param>
     public void Interact(InputAction.CallbackContext context)
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        //if (context.performed)
-
+        if (context.canceled)
         {
-            SceneManager.LoadScene("shop"); // Transition to the shop scene
+            // Check for nearby objects
+            Collider2D nearbyObject = Physics2D.OverlapCircle(transform.position, 1f, LayerMask.GetMask("Interactable"));
+
+            if (nearbyObject != null)
+            {
+                if (nearbyObject.CompareTag("blacksmith"))
+                {
+                    Debug.Log("Interacting with the blacksmith!");
+                    SceneManager.LoadScene("shop");
+                }
+                else
+                {
+                    Debug.LogWarning($"Nearby object found, but it's not a blacksmith: {nearbyObject.name}");
+                }
+            }
+            else
+            {
+                Debug.LogWarning("No interactable object found nearby.");
+            }
         }
     }
-
-   
 }

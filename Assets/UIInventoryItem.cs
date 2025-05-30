@@ -42,7 +42,7 @@ public class UIInventoryItem : MonoBehaviour
     {
         this.itemImage.gameObject.SetActive(true);
         this.itemImage.sprite = sprite;
-        this.quantityTxt.text = quantity + "";
+       this.quantityTxt.text = quantity + "";
         empty = false;
     }
     public void Select()
@@ -64,9 +64,8 @@ public class UIInventoryItem : MonoBehaviour
     {
         OnItemEndDrag?.Invoke(this);
     }
-    public void OnPointerClick(BaseEventData data)
+    public void OnPointerClick(PointerEventData pointerData)
     {
-        PointerEventData pointerData = (PointerEventData)data;
         if (pointerData.button == PointerEventData.InputButton.Right)
         {
             OnRightMouseBtnClick?.Invoke(this);

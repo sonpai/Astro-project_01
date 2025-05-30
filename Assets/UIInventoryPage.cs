@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 
 public class UIInventoryPage : MonoBehaviour
 {
@@ -10,7 +12,14 @@ public class UIInventoryPage : MonoBehaviour
     [SerializeField]
     private RectTransform contentPanel;
 
+    [SerializeField]
+    private UIInventoryDescription itemDescription;
+
     List<UIInventoryItem> listOfUIItems = new List<UIInventoryItem>();
+
+    public Sprite image;
+    public int quantity;
+    public string title, description;
 
     public void InitializeInventoryUI(int inventorySize)
     {
@@ -29,7 +38,11 @@ public class UIInventoryPage : MonoBehaviour
 
     private void HandleItemSelection(UIInventoryItem inventoryItemUI)
     {
-      
+        Debug.Log(inventoryItemUI.name);
+        itemDescription.SetDescription(image, title, description);
+        listOfUIItems[0].Select();
+
+
     }
 
     private void HandleBeginDrag(UIInventoryItem inventoryItemUI)
@@ -50,9 +63,19 @@ public class UIInventoryPage : MonoBehaviour
      
     }
 
+    private void Awake()
+    {
+        Hide();
+        itemDescription.ResetDescription();
+    }
+
     public void Show()
     {
-        gameObject.SetActive(true);
+         gameObject.SetActive(true);
+         itemDescription.ResetDescription();
+         listOfUIItems[0].SetData(image, quantity);
+
+
     }
     public void Hide()
     {

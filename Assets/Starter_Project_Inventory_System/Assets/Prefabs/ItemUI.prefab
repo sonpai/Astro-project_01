@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2490851921766362166}
   - component: {fileID: 8624488164768107562}
   - component: {fileID: 4534212302380680167}
-  - component: {fileID: 222664059702760332}
+  - component: {fileID: -7869055374255987502}
   m_Layer: 5
   m_Name: ItemUi
   m_TagString: Untagged
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &222664059702760332
+--- !u!114 &-7869055374255987502
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

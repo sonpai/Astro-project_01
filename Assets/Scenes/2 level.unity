@@ -275,19 +275,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5047327951047059449, guid: bdff7d2e93fc5874fa89112bf13f38ec, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5047327951047059449, guid: bdff7d2e93fc5874fa89112bf13f38ec, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5047327951047059449, guid: bdff7d2e93fc5874fa89112bf13f38ec, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 6.3668
       objectReference: {fileID: 0}
     - target: {fileID: 5047327951047059449, guid: bdff7d2e93fc5874fa89112bf13f38ec, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -3.85535
       objectReference: {fileID: 0}
     - target: {fileID: 7032362611978767481, guid: bdff7d2e93fc5874fa89112bf13f38ec, type: 3}
       propertyPath: m_AnchorMax.y
@@ -144803,7 +144803,12 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -20
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8125155055839226870, guid: bdff7d2e93fc5874fa89112bf13f38ec, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8125155055839226870, guid: bdff7d2e93fc5874fa89112bf13f38ec, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -144840,22 +144845,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 7307949198844524641}
-          m_TargetAssemblyTypeName: UIInventoryItem, Assembly-CSharp
-          m_MethodName: OnPointerClick
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
   - eventID: 6
     callback:
       m_PersistentCalls:
@@ -144910,9 +144899,9 @@ SceneRoots:
   m_Roots:
   - {fileID: 1064127601}
   - {fileID: 1112469249}
-  - {fileID: 2079129366}
   - {fileID: 1942934868}
   - {fileID: 706007954}
+  - {fileID: 2079129366}
   - {fileID: 1520431478}
   - {fileID: 533764900}
   - {fileID: 1967181228}

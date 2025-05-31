@@ -50,6 +50,8 @@ public class UIInventoryPage : MonoBehaviour
 
     private void HandleBeginDrag(UIInventoryItem inventoryItemUI)
     {
+        Debug.Log("hi");
+
         mouseFollower.Toggle(true);
         mouseFollower.SetData(image, quantity);
 

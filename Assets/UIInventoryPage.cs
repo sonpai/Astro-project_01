@@ -15,6 +15,9 @@ public class UIInventoryPage : MonoBehaviour
     [SerializeField]
     private UIInventoryDescription itemDescription;
 
+    [SerializeField]
+    private MouseFollower mouseFollower;
+
     List<UIInventoryItem> listOfUIItems = new List<UIInventoryItem>();
 
     public Sprite image;
@@ -33,6 +36,7 @@ public class UIInventoryPage : MonoBehaviour
             uiItem.OnItemDroppedOn += HandleSwap;
             uiItem.OnItemEndDrag += HandleEndDrag;
             uiItem.OnRightMouseBtnClick += HandleShowItemActions;
+            Debug.Log("Subscribing HandleShowItemActions for " + uiItem.name);
         }
     }
 
@@ -40,32 +44,38 @@ public class UIInventoryPage : MonoBehaviour
     {
         Debug.Log(inventoryItemUI.name);
         itemDescription.SetDescription(image, title, description);
-        listOfUIItems[0].Select();
-
+        inventoryItemUI.Select();
 
     }
 
     private void HandleBeginDrag(UIInventoryItem inventoryItemUI)
     {
-   
+        mouseFollower.Toggle(true);
+        mouseFollower.SetData(image, quantity);
+
     }
 
     private void HandleSwap(UIInventoryItem inventoryItemUI)
     {
+
     }
 
     private void HandleEndDrag(UIInventoryItem inventoryItemUI)
     {
+        mouseFollower.Toggle(false);
+
     }
 
     private void HandleShowItemActions(UIInventoryItem inventoryItemUI)
     {
-     
+        Debug.Log("HandleShowItemActions called by " + inventoryItemUI.name);
+
     }
 
     private void Awake()
     {
         Hide();
+        mouseFollower.Toggle(false);
         itemDescription.ResetDescription();
     }
 
@@ -74,7 +84,6 @@ public class UIInventoryPage : MonoBehaviour
          gameObject.SetActive(true);
          itemDescription.ResetDescription();
          listOfUIItems[0].SetData(image, quantity);
-
 
     }
     public void Hide()

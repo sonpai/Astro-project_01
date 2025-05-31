@@ -18,9 +18,10 @@ public class UIInventoryItem : MonoBehaviour , IPointerClickHandler
     [SerializeField]
     private Image borderImage;
 
-    public event Action<UIInventoryItem> OnItemClicked,
+      public event Action<UIInventoryItem> OnItemClicked,
         OnItemDroppedOn, OnItemBeginDrag, OnItemEndDrag,
         OnRightMouseBtnClick;
+
 
     private bool empty = true;
 
@@ -51,6 +52,8 @@ public class UIInventoryItem : MonoBehaviour , IPointerClickHandler
     }
     public void OnBeginDrag()
     {
+        Debug.Log("Drag started");
+
         if (empty)
             return;
         OnItemBeginDrag?.Invoke(this);
@@ -62,11 +65,15 @@ public class UIInventoryItem : MonoBehaviour , IPointerClickHandler
 
     public void OnEndDrag()
     {
+            Debug.Log("Drag ended");
+
         OnItemEndDrag?.Invoke(this);
     }
-    public void OnPointerClick(PointerEventData pointerData)
+
+
+    public void OnPointerClick(PointerEventData eventData)
     {
-        if (pointerData.button == PointerEventData.InputButton.Right)
+        if (eventData.button == PointerEventData.InputButton.Right)
         {
             OnRightMouseBtnClick?.Invoke(this);
         }
@@ -75,7 +82,6 @@ public class UIInventoryItem : MonoBehaviour , IPointerClickHandler
             OnItemClicked?.Invoke(this);
         }
     }
-
 
 
 

@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 
 
 
-public class UIInventoryItem : MonoBehaviour
+public class UIInventoryItem : MonoBehaviour , IPointerClickHandler
 {
     [SerializeField]
     private Image itemImage;

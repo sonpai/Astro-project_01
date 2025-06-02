@@ -194,142 +194,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5789209}
   m_CullTransparentMesh: 1
---- !u!1 &56995142
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 56995143}
-  - component: {fileID: 56995145}
-  - component: {fileID: 56995144}
-  m_Layer: 5
-  m_Name: DialogueText
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &56995143
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 56995142}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 558834630}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -175, y: 13.481}
-  m_SizeDelta: {x: 243.5812, y: 104.7528}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &56995144
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 56995142}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_text: 
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontSize: 5
-  m_fontSizeBase: 5
-  m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
-  m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_wordSpacing: 0
-  m_lineSpacing: 0
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 0
-  m_ActiveFontFeatures: 6e72656b
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_EmojiFallbackSupport: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 0
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!222 &56995145
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 56995142}
-  m_CullTransparentMesh: 1
 --- !u!1 &137596924
 GameObject:
   m_ObjectHideFlags: 0
@@ -540,7 +404,6 @@ RectTransform:
   - {fileID: 514858962}
   - {fileID: 1404706704}
   - {fileID: 430682652}
-  - {fileID: 558834630}
   - {fileID: 195035986}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -606,7 +469,6 @@ GameObject:
   - component: {fileID: 308448912}
   - component: {fileID: 308448914}
   - component: {fileID: 308448913}
-  - component: {fileID: 308448915}
   m_Layer: 5
   m_Name: ShopIterfacePanel
   m_TagString: Untagged
@@ -677,31 +539,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 308448911}
   m_CullTransparentMesh: 1
---- !u!114 &308448915
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 308448911}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90439b7ba054c5946b44e4ae7b745365, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainShopPanel: {fileID: 0}
-  buyPanel: {fileID: 0}
-  sellPanel: {fileID: 0}
-  openBuyPanelButton: {fileID: 0}
-  openSellPanelButton: {fileID: 0}
-  backFromBuyButton: {fileID: 0}
-  backFromSellButton: {fileID: 0}
-  buyItemsContainer: {fileID: 0}
-  sellItemsContainer: {fileID: 0}
-  shopItemUIPrefab: {fileID: 0}
-  playerCoinsText: {fileID: 0}
-  notificationText: {fileID: 0}
-  notificationDisplayTime: 3
 --- !u!1 &425853733
 GameObject:
   m_ObjectHideFlags: 0
@@ -1235,82 +1072,6 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 546773496}
-  m_CullTransparentMesh: 1
---- !u!1 &558834629
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 558834630}
-  - component: {fileID: 558834632}
-  - component: {fileID: 558834631}
-  m_Layer: 5
-  m_Name: DialogueBox
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &558834630
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 558834629}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 56995143}
-  m_Father: {fileID: 223670117}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -170.0041}
-  m_SizeDelta: {x: 0, y: -340.0082}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &558834631
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 558834629}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0c9a153f187b64e4caff0d38107778ca, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &558834632
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 558834629}
   m_CullTransparentMesh: 1
 --- !u!1 &571228668
 GameObject:
@@ -1909,6 +1670,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1086840376}
   - component: {fileID: 1086840377}
+  - component: {fileID: 1086840378}
   m_Layer: 5
   m_Name: _ShopUIMangager
   m_TagString: Untagged
@@ -1952,14 +1714,28 @@ MonoBehaviour:
   sellPanel: {fileID: 1457033455}
   openBuyPanelButton: {fileID: 546773498}
   openSellPanelButton: {fileID: 1255075669}
-  backFromBuyButton: {fileID: 1293992329}
-  backFromSellButton: {fileID: 571228670}
+  closeShopButton: {fileID: 0}
   buyItemsContainer: {fileID: 2108223272}
   sellItemsContainer: {fileID: 929866878}
   shopItemUIPrefab: {fileID: 5069680147333215971, guid: 241de720f53abe84f9d1e8112a44e271, type: 3}
   playerCoinsText: {fileID: 1960501663}
   notificationText: {fileID: 1230191509}
   notificationDisplayTime: 3
+--- !u!114 &1086840378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1086840375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6ca0e07c42578347b41b74380387120, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shopStock:
+  - {fileID: 11400000, guid: 3b7c75719905909459b67e2281884dcd, type: 2}
+  - {fileID: 11400000, guid: 6fea22bc7ce898645847782f06933746, type: 2}
 --- !u!1 &1201438167
 GameObject:
   m_ObjectHideFlags: 0
@@ -2004,7 +1780,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6ca0e07c42578347b41b74380387120, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemsForSale: []
+  shopStock: []
 --- !u!1 &1230191507
 GameObject:
   m_ObjectHideFlags: 0
@@ -2644,8 +2420,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf8c95fb6f36c4d44b7286afe0ad279f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueBox: {fileID: 558834629}
-  dialogueText: {fileID: 56995144}
+  dialogueBox: {fileID: 0}
+  dialogueText: {fileID: 0}
 --- !u!1 &1451960984
 GameObject:
   m_ObjectHideFlags: 0
@@ -3384,7 +3160,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 308448915}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ShopUIManager, Assembly-CSharp
         m_MethodName: CloseShop
         m_Mode: 1

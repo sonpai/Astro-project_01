@@ -1,234 +1,164 @@
 // ShopUIManager.cs
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using System.Collections.Generic;
-using System; // For Action
+using TMPro; // If using TextMeshPro
 
 public class ShopUIManager : MonoBehaviour
 {
+    public static ShopUIManager Instance { get; private set; }
+
     [Header("Main Panels")]
-    public GameObject mainShopPanel;
-    public GameObject buyPanel;
-    public GameObject sellPanel;
+    public GameObject mainShopPanel; // Assign the overall shop window
+    public GameObject buyPanel;       // Assign the panel for buyable items
+    public GameObject sellPanel;      // Assign the panel for sellable player items
 
     [Header("Buttons")]
     public Button openBuyPanelButton;
     public Button openSellPanelButton;
-    public Button backFromBuyButton;
-    public Button backFromSellButton;
-    // public Button closeShopButton;
+    public Button closeShopButton; // Or back buttons for each panel
 
     [Header("Item List Containers")]
-    public Transform buyItemsContainer;
-    public Transform sellItemsContainer;
+    public RectTransform buyItemsContainer;  // Parent for shop's items to buy
+    public RectTransform sellItemsContainer; // Parent for player's items to sell
 
     [Header("Item UI Prefabs")]
-    public GameObject shopItemUIPrefab;
+    public GameObject shopItemUIPrefab; // Prefab for a single item entry in buy/sell lists (has ShopItemUIController.cs)
 
     [Header("Player Info & Notifications")]
-    public TextMeshProUGUI playerCoinsText;
-    public TextMeshProUGUI notificationText;
+    public TMP_Text playerCoinsText;
+    public TMP_Text notificationText;
     public float notificationDisplayTime = 3f;
-    private float _notificationTimer;
 
-    private ShopSystem _shopSystem;
+    private ShopSystem shopSystem; // Reference to the shop's backend logic
+
+    void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+
+        shopSystem = GetComponent<ShopSystem>(); // Assuming ShopSystem is on the same GameObject
+        if (shopSystem == null) Debug.LogError("ShopUIManager: ShopSystem component not found!");
+    }
 
     void Start()
     {
-        // For Unity 2023.1+
-        _shopSystem = FindFirstObjectByType<ShopSystem>();
-        // For older Unity versions, use:
-        // _shopSystem = FindObjectOfType<ShopSystem>(); 
+        if (mainShopPanel != null) mainShopPanel.SetActive(false); // Start hidden
+        if (buyPanel != null) buyPanel.SetActive(false);
+        if (sellPanel != null) sellPanel.SetActive(false);
 
-        if (_shopSystem == null)
-        {
-            Debug.LogError("ShopUIManager: ShopSystem not found in the scene!");
-            enabled = false;
-            return;
-        }
-
+        // Setup Button Listeners
         openBuyPanelButton?.onClick.AddListener(ShowBuyPanel);
         openSellPanelButton?.onClick.AddListener(ShowSellPanel);
-        backFromBuyButton?.onClick.AddListener(ShowMainShopPanel);
-        backFromSellButton?.onClick.AddListener(ShowMainShopPanel);
-        // closeShopButton?.onClick.AddListener(CloseShop);
+        closeShopButton?.onClick.AddListener(HideShop); // Example
 
-        // Ensure PlayerWallet and PlayerInventory instances are ready
+        // Subscribe to PlayerWallet for coin updates
         if (PlayerWallet.Instance != null)
         {
-            PlayerWallet.Instance.OnCoinsChanged += UpdateCoinDisplay;
-            UpdateCoinDisplay(PlayerWallet.Instance.CurrentCoins); // Initial display
+            PlayerWallet.Instance.OnCoinsChanged += UpdateCoinsDisplay;
+            UpdateCoinsDisplay(PlayerWallet.Instance.CurrentCoins); // Initial display
         }
-        else Debug.LogError("PlayerWallet.Instance is null in ShopUIManager.Start()");
-
-
-        if (PlayerInventory.Instance != null)
-        {
-            PlayerInventory.Instance.OnInventoryChanged += RefreshSellPanelIfActive;
-        }
-        else Debug.LogError("PlayerInventory.Instance is null in ShopUIManager.Start()");
-
-
-        ShopSystem.OnTransactionStatus += ShowNotification;
-
-        ShowMainShopPanel();
-        if (notificationText != null) notificationText.gameObject.SetActive(false);
+        else Debug.LogWarning("ShopUIManager: PlayerWallet.Instance not found on Start.");
     }
 
-    private void OnDestroy()
+    void OnDestroy()
     {
-        if (PlayerWallet.Instance != null) PlayerWallet.Instance.OnCoinsChanged -= UpdateCoinDisplay;
-        if (PlayerInventory.Instance != null) PlayerInventory.Instance.OnInventoryChanged -= RefreshSellPanelIfActive;
-        ShopSystem.OnTransactionStatus -= ShowNotification; // Assuming OnTransactionStatus is static
+        if (PlayerWallet.Instance != null) PlayerWallet.Instance.OnCoinsChanged -= UpdateCoinsDisplay;
     }
 
-    void Update()
+    public void ShowShop() // Called by player interaction (e.g., talking to NPC)
     {
-        if (_notificationTimer > 0)
-        {
-            _notificationTimer -= Time.deltaTime;
-            if (_notificationTimer <= 0 && notificationText != null)
-            {
-                notificationText.gameObject.SetActive(false);
-            }
-        }
+        if (mainShopPanel == null) { Debug.LogError("MainShopPanel not assigned!"); return; }
+        mainShopPanel.SetActive(true);
+        ShowBuyPanel(); // Default to buy panel or neither
+        UpdateCoinsDisplay(PlayerWallet.Instance != null ? PlayerWallet.Instance.CurrentCoins : 0);
     }
 
-    public void ShowMainShopPanel()
+    public void HideShop()
     {
-        mainShopPanel?.SetActive(true);
-        buyPanel?.SetActive(false);
-        sellPanel?.SetActive(false);
+        if (mainShopPanel != null) mainShopPanel.SetActive(false);
     }
 
-    public void ShowBuyPanel()
+    void ShowBuyPanel()
     {
-        mainShopPanel?.SetActive(false);
-        buyPanel?.SetActive(true);
-        sellPanel?.SetActive(false);
+        if (buyPanel != null) buyPanel.SetActive(true);
+        if (sellPanel != null) sellPanel.SetActive(false);
         PopulateBuyList();
     }
 
-    public void ShowSellPanel()
+    void ShowSellPanel()
     {
-        mainShopPanel?.SetActive(false);
-        buyPanel?.SetActive(false);
-        sellPanel?.SetActive(true);
+        if (sellPanel != null) sellPanel.SetActive(true);
+        if (buyPanel != null) buyPanel.SetActive(false);
         PopulateSellList();
     }
 
-    public void CloseShop()
+    void PopulateBuyList()
     {
-        Debug.Log("Shop Closed (Implement scene change or UI hide).");
-        // Example: gameObject.SetActive(false); 
-    }
+        if (shopSystem == null || buyItemsContainer == null || shopItemUIPrefab == null) return;
+        ClearContainer(buyItemsContainer);
 
-    private void PopulateBuyList()
-    {
-        if (buyItemsContainer == null || shopItemUIPrefab == null || _shopSystem == null) return;
-        foreach (Transform child in buyItemsContainer) Destroy(child.gameObject);
-
-        foreach (ItemData item in _shopSystem.itemsForSale)
+        List<ItemData> itemsToBuy = shopSystem.GetItemsForSale(); // Get from ShopSystem
+        foreach (ItemData item in itemsToBuy)
         {
-            if (item == null || !item.canBeBought) continue;
-            GameObject itemGO = Instantiate(shopItemUIPrefab, buyItemsContainer);
-            ShopItemUIController uiController = itemGO.GetComponent<ShopItemUIController>();
-            if (uiController != null)
+            if (item.canBeBought) // Double check
             {
-                uiController.SetupBuyItem(item, _shopSystem);
-            }
-        }
-    }
-
-    // Inside ShopUIManager.cs
-    // ShopUIManager.cs
-    // ...
-    private void PopulateSellList()
-    {
-        if (sellItemsContainer == null || shopItemUIPrefab == null || _shopSystem == null ||
-            InventoryController.Instance == null || ItemDataManager.Instance == null) // You will still need InventoryController.cs
-        {
-            Debug.LogError("Missing references for PopulateSellList. Ensure InventoryController is in the scene and its script is correct.");
-            return;
-        }
-
-        foreach (Transform child in sellItemsContainer) Destroy(child.gameObject);
-
-        var inventoryDataSlots = InventoryController.Instance.InventorySlots_ReadOnly;
-        for (int i = 0; i < inventoryDataSlots.Count; i++)
-        {
-            // ***** FIX HERE *****
-            // Change InventorySlotData to InventorySlot, assuming InventorySlots_ReadOnly returns a list of InventorySlot
-            InventorySlot slotData = inventoryDataSlots[i];
-            // ********************
-
-            if (slotData != null && !slotData.IsEmpty()) // Added null check for slotData itself
-            {
-                ItemData item = ItemDataManager.Instance.GetItemByID(slotData.itemID);
-                if (item != null && item.canBeSold && item.sellPrice > 0)
+                GameObject itemEntry = Instantiate(shopItemUIPrefab, buyItemsContainer);
+                ShopItemUIController entryController = itemEntry.GetComponent<ShopItemUIController>();
+                if (entryController != null)
                 {
-                    GameObject itemGO = Instantiate(shopItemUIPrefab, sellItemsContainer);
-                    ShopItemUIController uiController = itemGO.GetComponent<ShopItemUIController>();
-                    if (uiController != null)
-                    {
-                        uiController.SetupSellItem(item, slotData.quantity, _shopSystem);
-                    }
+                    entryController.SetupBuyItem(item, shopSystem); // Pass ShopSystem for buy action
                 }
             }
         }
     }
-    // ...
 
-    // Change subscription in Start/OnDestroy:
-    // From: PlayerInventory.Instance.OnInventoryChanged += RefreshSellPanelIfActive;
-    // To:
-    // if (InventoryController.Instance != null) InventoryController.Instance.OnInventoryRefreshed += RefreshSellPanelIfActive;
-    // And also consider OnInventorySlotUpdated if you want more dynamic updates without full refresh.
-    // For simplicity, OnInventoryRefreshed is a good start when the whole sell panel might change.
-    // Let's use OnInventoryRefreshed and also call it when an item is sold successfully.
-
-    // In ShopUIManager.cs, modify Start() and OnDestroy() for event subscription:
-    // ...
-    // if (InventoryController.Instance != null)
-    // {
-    //     InventoryController.Instance.OnInventoryRefreshed += RefreshSellPanelIfActive;
-    //     // Also, when an individual slot updates, you might want to refresh if it's a sellable item
-    //     InventoryController.Instance.OnInventorySlotUpdated += HandlePotentialSellableItemChange;
-    // }
-    // ...
-    // private void HandlePotentialSellableItemChange(int slotIndex, ItemData itemData, int quantity)
-    // {
-    //     // If the sell panel is active and this item could have been on it, refresh
-    //     if (sellPanel != null && sellPanel.activeSelf)
-    //     {
-    //         RefreshSellPanelIfActive(); // Simple refresh for now
-    //     }
-    // }
-    // ...
-
-    private void RefreshSellPanelIfActive()
+    void PopulateSellList()
     {
-        if (sellPanel != null && sellPanel.activeSelf)
+        if (InventoryController.Instance == null || sellItemsContainer == null || shopItemUIPrefab == null) return;
+        ClearContainer(sellItemsContainer);
+
+        // Get sellable items directly from the Player's InventoryController
+        for (int i = 0; i < InventoryController.Instance.inventorySize; i++)
         {
-            PopulateSellList();
+            ItemData item = InventoryController.Instance.GetItemDataInSlot(i);
+            int quantity = InventoryController.Instance.GetQuantityInSlot(i);
+
+            if (item != null && item.canBeSold && quantity > 0)
+            {
+                GameObject itemEntry = Instantiate(shopItemUIPrefab, sellItemsContainer);
+                ShopItemUIController entryController = itemEntry.GetComponent<ShopItemUIController>();
+                if (entryController != null)
+                {
+                    entryController.SetupSellItem(item, quantity, shopSystem); // Pass ShopSystem for sell action
+                }
+            }
         }
     }
 
-    private void UpdateCoinDisplay(int newAmount)
+    void ClearContainer(RectTransform container)
     {
-        if (playerCoinsText != null)
+        foreach (Transform child in container) Destroy(child.gameObject);
+    }
+
+    public void UpdateCoinsDisplay(int currentCoins)
+    {
+        if (playerCoinsText != null) playerCoinsText.text = "Coins: " + currentCoins.ToString();
+    }
+
+    public void ShowNotification(string message)
+    {
+        if (notificationText != null)
         {
-            playerCoinsText.text = $"Coins: {newAmount}";
+            notificationText.text = message;
+            notificationText.gameObject.SetActive(true);
+            CancelInvoke(nameof(HideNotification)); // Cancel previous hide invoke
+            Invoke(nameof(HideNotification), notificationDisplayTime);
         }
     }
 
-    private void ShowNotification(string message, Color color)
+    void HideNotification()
     {
-        if (notificationText == null) return;
-        notificationText.text = message;
-        notificationText.color = color;
-        notificationText.gameObject.SetActive(true);
-        _notificationTimer = notificationDisplayTime;
+        if (notificationText != null) notificationText.gameObject.SetActive(false);
     }
 }

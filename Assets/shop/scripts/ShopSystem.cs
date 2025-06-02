@@ -1,68 +1,76 @@
-// ShopSystem.cs (Modified to use InventoryController)
+// ShopSystem.cs
 using UnityEngine;
 using System.Collections.Generic;
-using System;
 
 public class ShopSystem : MonoBehaviour
 {
-    [Tooltip("Items available for purchase in this shop.")]
-    public List<ItemData> itemsForSale;
+    [Header("Shop Inventory (Items the Shop Sells)")]
+    public List<ItemData> shopStock; // Assign ItemData assets the shop sells in the Inspector
 
-    public static event Action<string, Color> OnTransactionStatus;
+    // No need for player inventory reference here, we'll use InventoryController.Instance
 
-    public bool TryPurchaseItem(ItemData itemToBuy)
+    public List<ItemData> GetItemsForSale()
     {
-        if (itemToBuy == null || PlayerWallet.Instance == null || InventoryController.Instance == null || ItemDataManager.Instance == null)
+        // You might have more complex logic here later (e.g., dynamic stock)
+        return new List<ItemData>(shopStock);
+    }
+
+    public bool PlayerBuysItem(ItemData itemData)
+    {
+        if (itemData == null || !itemData.canBeBought) return false;
+        if (PlayerWallet.Instance == null || InventoryController.Instance == null)
         {
-            OnTransactionStatus?.Invoke("System error or invalid item.", Color.red);
+            Debug.LogError("ShopSystem: PlayerWallet or InventoryController not found!");
             return false;
         }
 
-        if (PlayerWallet.Instance.HasEnoughCoins(itemToBuy.buyPrice))
+        if (PlayerWallet.Instance.SpendCoins(itemData.buyPrice))
         {
-            PlayerWallet.Instance.SpendCoins(itemToBuy.buyPrice);
-            // Use the AddItem that takes ItemData
-            InventoryController.Instance.AddItem(itemToBuy, 1);
-            OnTransactionStatus?.Invoke($"Purchased {itemToBuy.itemName} for {itemToBuy.buyPrice} coins.", Color.green);
-            return true;
+            if (InventoryController.Instance.AddItem(itemData, 1))
+            {
+                ShopUIManager.Instance?.ShowNotification($"{itemData.itemName} bought!");
+                // Optionally: Logic for limited shop stock (remove from shopStock if finite)
+                return true;
+            }
+            else
+            {
+                // Inventory full, refund coins
+                PlayerWallet.Instance.AddCoins(itemData.buyPrice);
+                ShopUIManager.Instance?.ShowNotification($"Inventory full! Could not buy {itemData.itemName}.");
+                return false;
+            }
         }
         else
         {
-            OnTransactionStatus?.Invoke($"Not enough coins ({itemToBuy.buyPrice} needed).", Color.yellow);
+            ShopUIManager.Instance?.ShowNotification($"Not enough coins for {itemData.itemName}.");
             return false;
         }
     }
 
-    // Selling now needs to know which item (by ItemData) and how many.
-    // The ShopUIManager will iterate through InventoryController's slots to display sellable items.
-    // When a "Sell" button on a specific item in the sell UI is clicked, it will pass its ItemData.
-    public bool TrySellItem(ItemData itemToSell, int quantityToSell = 1)
+    public bool PlayerSellsItem(ItemData itemData, int quantityToSell = 1)
     {
-        if (itemToSell == null || !itemToSell.canBeSold || quantityToSell <= 0 || PlayerWallet.Instance == null || InventoryController.Instance == null)
+        if (itemData == null || !itemData.canBeSold || quantityToSell <= 0) return false;
+        if (PlayerWallet.Instance == null || InventoryController.Instance == null)
         {
-            OnTransactionStatus?.Invoke("Cannot sell item or system error.", Color.red);
+            Debug.LogError("ShopSystem: PlayerWallet or InventoryController not found!");
             return false;
         }
 
-        // Check quantity using InventoryController
-        // Note: GetItemQuantity in the new InventoryController would need an ItemData argument or you'd iterate.
-        // For simplicity, let's assume we modify InventoryController to have a GetItemQuantity(ItemData item)
-        // or ShopUIManager provides the slot index.
-        // For now, let's use RemoveItemByData which handles finding the item.
+        // Check if player actually has enough of the item
+        // Note: InventoryController.RemoveItemByData will handle the quantity check and removal.
+        // We just need to ensure it was successful before giving coins.
 
-        bool removed = InventoryController.Instance.RemoveItemByData(itemToSell, quantityToSell);
-        if (removed)
+        if (InventoryController.Instance.RemoveItemByData(itemData, quantityToSell))
         {
-            int coinsGained = itemToSell.sellPrice * quantityToSell;
-            PlayerWallet.Instance.AddCoins(coinsGained);
-            OnTransactionStatus?.Invoke($"Sold {quantityToSell}x {itemToSell.itemName} for {coinsGained} coins.", Color.green);
+            PlayerWallet.Instance.AddCoins(itemData.sellPrice * quantityToSell);
+            ShopUIManager.Instance?.ShowNotification($"{quantityToSell}x {itemData.itemName} sold for {itemData.sellPrice * quantityToSell} coins!");
+            // Optionally: Add sold item to shop's buyable stock if you want that mechanic
             return true;
         }
         else
         {
-             // RemoveItemByData will log if not enough. We can add a more specific message.
-             OnTransactionStatus?.Invoke($"Not enough {itemToSell.itemName} to sell or error.", Color.yellow);
-             return false;
+            ShopUIManager.Instance?.ShowNotification($"Could not sell {itemData.itemName}. Item not found or not enough quantity.");
+            return false;
         }
     }
 }

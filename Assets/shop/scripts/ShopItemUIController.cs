@@ -1,95 +1,81 @@
 // ShopItemUIController.cs
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro; // Use TextMeshPro
+using TMPro;
 
 public class ShopItemUIController : MonoBehaviour
 {
-    [Header("UI References")]
-    public Image itemIconImage;
-    public TextMeshProUGUI itemNameText;
-    public TextMeshProUGUI itemPriceText; // Used for Buy Price or "Qty: X | Sell Price: Y"
-    public Button actionButton; // Buy or Sell button
+    [SerializeField] private Image itemIconImage;
+    [SerializeField] private TMP_Text itemNameText;
+    [SerializeField] private TMP_Text itemPriceText;
+    [SerializeField] private TMP_Text itemQuantityText; // For sell panel primarily
+    [SerializeField] private Button actionButton; // This will be "Buy" or "Sell"
 
-    private ItemData _currentItem;
-    private int _currentQuantityInInventory; // Only relevant for sell panel
+    private ItemData _currentItemData;
+    private int _currentQuantityInPlayerInventory; // Only relevant for selling
     private ShopSystem _shopSystemInstance;
-    private bool _isBuyItem; // True if this UI is for buying, false for selling
+    private bool _isBuyMode;
 
-    public void SetupBuyItem(ItemData item, ShopSystem shopSystem)
+    public void SetupBuyItem(ItemData data, ShopSystem shopSystem)
     {
-        _currentItem = item;
+        _currentItemData = data;
         _shopSystemInstance = shopSystem;
-        _isBuyItem = true;
+        _isBuyMode = true;
 
-        if (itemIconImage != null) itemIconImage.sprite = item.itemIcon;
-        if (itemNameText != null) itemNameText.text = item.itemName;
-        if (itemPriceText != null) itemPriceText.text = $"Price: {item.buyPrice} C";
+        if (itemIconImage != null) itemIconImage.sprite = data.itemIcon;
+        if (itemNameText != null) itemNameText.text = data.itemName;
+        if (itemPriceText != null) itemPriceText.text = "Price: " + data.buyPrice.ToString();
+        if (itemQuantityText != null) itemQuantityText.gameObject.SetActive(false); // Not needed for buy list
 
-        if (actionButton != null)
-        {
-            actionButton.onClick.RemoveAllListeners(); // Clear previous
-            actionButton.onClick.AddListener(OnActionButtonClicked);
-            TextMeshProUGUI buttonText = actionButton.GetComponentInChildren<TextMeshProUGUI>();
-            if (buttonText != null) buttonText.text = "Buy";
-            actionButton.interactable = item.canBeBought && PlayerWallet.Instance.HasEnoughCoins(item.buyPrice); // Initial interactability
-        }
+        actionButton?.onClick.RemoveAllListeners();
+        actionButton?.onClick.AddListener(OnActionButtonClicked);
+        if (actionButton?.GetComponentInChildren<TMP_Text>() != null)
+            actionButton.GetComponentInChildren<TMP_Text>().text = "Buy";
     }
 
-    public void SetupSellItem(ItemData item, int quantity, ShopSystem shopSystem)
+    public void SetupSellItem(ItemData data, int quantity, ShopSystem shopSystem)
     {
-        _currentItem = item;
-        _currentQuantityInInventory = quantity;
+        _currentItemData = data;
+        _currentQuantityInPlayerInventory = quantity;
         _shopSystemInstance = shopSystem;
-        _isBuyItem = false;
+        _isBuyMode = false;
 
-        if (itemIconImage != null) itemIconImage.sprite = item.itemIcon;
-        if (itemNameText != null) itemNameText.text = item.itemName;
-        if (itemPriceText != null) itemPriceText.text = $"Qty: {quantity} | Sell for: {item.sellPrice} C";
+        if (itemIconImage != null) itemIconImage.sprite = data.itemIcon;
+        if (itemNameText != null) itemNameText.text = data.itemName;
+        if (itemPriceText != null) itemPriceText.text = "Sell for: " + data.sellPrice.ToString();
 
-        if (actionButton != null)
+        if (itemQuantityText != null)
         {
-            actionButton.onClick.RemoveAllListeners();
-            actionButton.onClick.AddListener(OnActionButtonClicked);
-            TextMeshProUGUI buttonText = actionButton.GetComponentInChildren<TextMeshProUGUI>();
-            if (buttonText != null) buttonText.text = "Sell 1"; // Or "Sell All" with more logic
-            actionButton.interactable = item.canBeSold && quantity > 0;
+            itemQuantityText.gameObject.SetActive(true);
+            itemQuantityText.text = "Qty: " + quantity.ToString();
         }
+
+        actionButton?.onClick.RemoveAllListeners();
+        actionButton?.onClick.AddListener(OnActionButtonClicked);
+        if (actionButton?.GetComponentInChildren<TMP_Text>() != null)
+            actionButton.GetComponentInChildren<TMP_Text>().text = "Sell 1"; // Or "Sell All" with more logic
     }
 
-    private void OnActionButtonClicked()
+    void OnActionButtonClicked()
     {
-        if (_currentItem == null || _shopSystemInstance == null) return;
+        if (_currentItemData == null || _shopSystemInstance == null) return;
 
-        if (_isBuyItem)
+        if (_isBuyMode)
         {
-            _shopSystemInstance.TryPurchaseItem(_currentItem);
-            // Optionally, update this button's interactable state after purchase attempt
-            if (actionButton != null) actionButton.interactable = _currentItem.canBeBought && PlayerWallet.Instance.HasEnoughCoins(_currentItem.buyPrice);
+            _shopSystemInstance.PlayerBuysItem(_currentItemData);
+            // The ShopUIManager might re-populate lists if stock changes or coins update.
+            // For simplicity, this example doesn't force an immediate list refresh here,
+            // assuming coin updates are handled by PlayerWallet events.
         }
-        else // Selling
+        else // Sell Mode
         {
-            // For simplicity, this sells one at a time.
-            // You could add a quantity selector or "Sell All" button.
-            _shopSystemInstance.TrySellItem(_currentItem, 1);
-            // The sell list will be refreshed by ShopUIManager, so this specific item UI might be destroyed and recreated.
-        }
-    }
-
-    // Optional: Listen to coin changes to update buy button interactability
-    private void OnEnable()
-    {
-        if (_isBuyItem && _currentItem != null) PlayerWallet.Instance.OnCoinsChanged += HandleCoinsChangedForBuyButton;
-    }
-    private void OnDisable()
-    {
-        if (_isBuyItem && _currentItem != null && PlayerWallet.Instance != null) PlayerWallet.Instance.OnCoinsChanged -= HandleCoinsChangedForBuyButton;
-    }
-    private void HandleCoinsChangedForBuyButton(int newCoinAmount)
-    {
-        if (actionButton != null && _isBuyItem && _currentItem != null)
-        {
-            actionButton.interactable = _currentItem.canBeBought && newCoinAmount >= _currentItem.buyPrice;
+            // For now, always sell 1. You can add quantity selection later.
+            bool sold = _shopSystemInstance.PlayerSellsItem(_currentItemData, 1);
+            //if (sold)
+            //{
+            //    // Important: The sell list needs to be refreshed because item quantity changed or item removed.
+            //    ShopUIManager.Instance?.ShowSellPanel(); // Re-calls PopulateSellList
+            //}
         }
     }
 }

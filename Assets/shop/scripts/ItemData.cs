@@ -26,25 +26,30 @@
 // ItemData.cs
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Item Data")]
+[CreateAssetMenu(fileName = "New ItemData", menuName = "Inventory/Item Data")]
 public class ItemData : ScriptableObject
 {
-    public string itemID;         // Unique ID for the item
-    public string itemName;       // Display name
-    public Sprite itemIcon;       // Icon for UI
-    [TextArea]
-    public string description;    // Description for UI
+    [Tooltip("Unique ID for this item (e.g., 'potion_health_01'). Case-sensitive.")]
+    public string itemID;
+    public string itemName = "New Item";
+    public Sprite itemIcon; // Assign this in the Inspector for each ItemData asset
+    [TextArea(3, 10)]
+    public string description = "Item Description.";
 
-    public bool isStackable;
-    public int maxStackSize = 99;
+    [Header("Stacking")]
+    public bool isStackable = true;
+    public int maxStackSize = 99; // Only relevant if isStackable is true
 
-    // --- SHOP RELATED ---
-    public bool canBeBought;      // << ADD THIS
-    public int buyPrice;          // << ADD THIS
+    [Header("Shop Details")]
+    public bool canBeBought = true;  // If it can appear in the shop's "buy" section
+    public int buyPrice = 10;
+    public bool canBeSold = true;   // If the player can sell this item
+    public int sellPrice = 5;
 
-    // --- SELLING RELATED (already likely present from previous steps) ---
-    public bool canBeSold;
-    public int sellPrice;
-
-    // public bool isConsumable; // Optional: for item usage logic
+    // Optional: Add other game-specific properties
+    // public enum ItemType { General, Potion, Weapon, Armor, Quest }
+    // public ItemType itemType = ItemType.General;
+    // public bool isConsumable = false;
+    // public int effectValue = 0; // e.g., health restored, damage bonus
 }
+

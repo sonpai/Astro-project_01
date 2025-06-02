@@ -13,38 +13,46 @@ public class ItemDataManager : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Log("ItemDataManager: Awake() called."); // <<< ADD THIS LOG
         if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject); // Make this persistent
             InitializeDatabase();
+            Debug.Log("ItemDataManager: Instance SET and Database Initialized."); // <<< ADD THIS LOG
         }
-        else
+        else if (Instance != this) // Ensure it's not just re-awakening on scene load
         {
+            Debug.LogWarning("ItemDataManager: Another instance already exists. Destroying this one."); // <<< ADD THIS LOG
             Destroy(gameObject);
         }
     }
+
 
     private void InitializeDatabase()
     {
         _itemDatabase = new Dictionary<string, ItemData>();
         if (allGameItems == null)
         {
-            Debug.LogError("ItemDataManager: allGameItems list is not assigned!");
-            allGameItems = new List<ItemData>(); // Prevent null reference if used later
+            Debug.LogError("ItemDataManager: allGameItems list is NOT ASSIGNED in Inspector!");
+            allGameItems = new List<ItemData>(); // Prevent null reference
             return;
+        }
+        if (allGameItems.Count == 0)
+        {
+            Debug.LogWarning("ItemDataManager: allGameItems list is EMPTY. No items will be loaded.");
         }
 
         foreach (ItemData item in allGameItems)
         {
             if (item == null)
             {
-                Debug.LogWarning("ItemDataManager: Found a null ItemData in allGameItems list.");
+                Debug.LogWarning("ItemDataManager: Found a NULL ItemData in allGameItems list.");
                 continue;
             }
             if (string.IsNullOrEmpty(item.itemID))
             {
-                Debug.LogWarning($"ItemDataManager: ItemData '{item.name}' has a null or empty itemID!");
+                Debug.LogWarning($"ItemDataManager: ItemData asset '{item.name}' has a NULL or EMPTY itemID!");
                 continue;
             }
             if (!_itemDatabase.ContainsKey(item.itemID))
@@ -53,19 +61,23 @@ public class ItemDataManager : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning($"ItemDataManager: Duplicate itemID '{item.itemID}' found. Using the first instance.");
+                Debug.LogWarning($"ItemDataManager: DUPLICATE itemID '{item.itemID}' found for item '{item.name}'. Using the first instance ('{_itemDatabase[item.itemID].name}').");
             }
         }
-        Debug.Log($"Item Database Initialized with {_itemDatabase.Count} items.");
+        Debug.Log($"ItemDataManager: Database Initialized with {_itemDatabase.Count} unique items.");
     }
 
     public ItemData GetItemByID(string id)
     {
-        _itemDatabase.TryGetValue(id, out ItemData item);
-        if (item == null)
+        if (_itemDatabase == null)
         {
-            // Debug.LogWarning($"ItemDataManager: Item with ID '{id}' not found.");
+            Debug.LogError("ItemDataManager: GetItemByID called but _itemDatabase is null! Was InitializeDatabase run?");
+            return null;
         }
+        if (string.IsNullOrEmpty(id)) return null;
+
+        _itemDatabase.TryGetValue(id, out ItemData item);
+        // if (item == null) Debug.LogWarning($"ItemDataManager: Item with ID '{id}' not found in database."); // Can be noisy
         return item;
     }
 }

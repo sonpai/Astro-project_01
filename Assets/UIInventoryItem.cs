@@ -22,6 +22,8 @@ public class UIInventoryItem : MonoBehaviour, IPointerClickHandler, IBeginDragHa
 
     private void Awake()
     {
+        Debug.Log("1"); // <<< ADD THIS LOG
+
         ResetData();
         Deselect();
     }
@@ -33,10 +35,11 @@ public class UIInventoryItem : MonoBehaviour, IPointerClickHandler, IBeginDragHa
 
     public void ResetData()
     {
+        // Debug.Log($"UIInventoryItem [{SlotIndex}] ResetData called.");
         if (itemImage != null)
         {
-            itemImage.gameObject.SetActive(false);
-            itemImage.sprite = null;
+            itemImage.sprite = null; // Important: clear the sprite
+            itemImage.gameObject.SetActive(false); // Hide the image element
         }
         if (quantityTxt != null) quantityTxt.text = "";
         _empty = true;
@@ -49,14 +52,19 @@ public class UIInventoryItem : MonoBehaviour, IPointerClickHandler, IBeginDragHa
 
     public void SetData(Sprite sprite, int quantity)
     {
-        if (itemImage != null)
-        {
-            itemImage.gameObject.SetActive(true);
-            itemImage.sprite = sprite;
-        }
+        Debug.Log("2"); // <<< ADD THIS LOG
+
+        // Debug.Log($"UIInventoryItem [{SlotIndex}] SetData - Sprite: {(sprite != null ? sprite.name : "NULL")}, Qty: {quantity}");
+        if (itemImage == null) { Debug.LogError($"UIInventoryItem [{SlotIndex}]: itemImage field is NOT ASSIGNED in prefab/inspector!"); return; }
+        if (quantityTxt == null && quantity > 1) { Debug.LogWarning($"UIInventoryItem [{SlotIndex}]: quantityTxt field is NOT ASSIGNED but quantity is > 1!"); }
+
+        itemImage.gameObject.SetActive(true);
+        itemImage.sprite = sprite;
+        // Debug.Log($"UIInventoryItem [{SlotIndex}]: itemImage.sprite set to {(itemImage.sprite != null ? itemImage.sprite.name : "NULL")}. Active: {itemImage.gameObject.activeSelf}, Enabled: {itemImage.enabled}");
+
+
         if (quantityTxt != null)
         {
-            // Show quantity only if > 1 (or based on your preference for stackable items)
             quantityTxt.text = quantity > 1 ? quantity.ToString() : "";
         }
         _empty = false;
@@ -71,6 +79,8 @@ public class UIInventoryItem : MonoBehaviour, IPointerClickHandler, IBeginDragHa
     {
         if (_empty && eventData.button != PointerEventData.InputButton.Right) // Don't invoke left click on empty unless needed
         {
+            Debug.Log("3"); // <<< ADD THIS LOG
+
             // Optionally, deselect other items or handle empty slot click
             // OnItemClicked?.Invoke(this); // If you want empty slots to be "selectable"
             return;

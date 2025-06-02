@@ -147,6 +147,9 @@ public class player_movment : MonoBehaviour
         if (other.CompareTag("blacksmith"))
         {
             interactionText.SetActive(true);
+            gameObject.SetActive(true);
+           // ShowMainShopPanel();
+            //UpdateCoinDisplay(PlayerWallet.Instance.CurrentCoins);
         }
     }
 
@@ -159,6 +162,7 @@ public class player_movment : MonoBehaviour
         if (other.CompareTag("blacksmith"))
         {
             interactionText.SetActive(false);
+
         }
     }
 

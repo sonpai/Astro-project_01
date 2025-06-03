@@ -1,164 +1,263 @@
 // ShopUIManager.cs
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UI; // Required for Button
+using TMPro;          // Required for TextMeshProUGUI
 using System.Collections.Generic;
-using TMPro; // If using TextMeshPro
 
 public class ShopUIManager : MonoBehaviour
 {
     public static ShopUIManager Instance { get; private set; }
 
     [Header("Main Panels")]
-    public GameObject mainShopPanel; // Assign the overall shop window
-    public GameObject buyPanel;       // Assign the panel for buyable items
-    public GameObject sellPanel;      // Assign the panel for sellable player items
+    public GameObject mainShopPanel; // The root panel for the entire shop interface
+    public GameObject buyPanel;      // Panel specifically for showing items to buy
+    public GameObject sellPanel;     // Panel specifically for showing player's items to sell
 
     [Header("Buttons")]
     public Button openBuyPanelButton;
     public Button openSellPanelButton;
-    public Button closeShopButton; // Or back buttons for each panel
+    public Button backFromBuyButton;    // Button inside buyPanel to go back to mainShopPanel choices
+    public Button backFromSellButton;   // Button inside sellPanel to go back to mainShopPanel choices
+    public Button closeShopOverallButton; // A general button to close the entire shop interface
 
     [Header("Item List Containers")]
-    public RectTransform buyItemsContainer;  // Parent for shop's items to buy
-    public RectTransform sellItemsContainer; // Parent for player's items to sell
+    public Transform buyItemsContainer;  // Parent RectTransform for instantiated buyable item UIs
+    public Transform sellItemsContainer; // Parent RectTransform for instantiated sellable item UIs
 
     [Header("Item UI Prefabs")]
-    public GameObject shopItemUIPrefab; // Prefab for a single item entry in buy/sell lists (has ShopItemUIController.cs)
+    public GameObject shopItemUIPrefab; // Prefab for displaying a single item in buy/sell lists
 
     [Header("Player Info & Notifications")]
-    public TMP_Text playerCoinsText;
-    public TMP_Text notificationText;
+    public TextMeshProUGUI playerCoinsText;
+    public TextMeshProUGUI notificationText;
     public float notificationDisplayTime = 3f;
+    private float _notificationTimer;
 
-    private ShopSystem shopSystem; // Reference to the shop's backend logic
+    private ShopSystem _shopSystem;
+
+    // Reference to your game's main menu panel (or whatever should reappear when shop closes)
+    public GameObject panelToReactivateOnClose;
 
     void Awake()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
+        if (Instance == null)
+        {
+            Instance = this;
+            // DontDestroyOnLoad(gameObject); // Optional: if shop UI persists across scenes
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
 
-        shopSystem = GetComponent<ShopSystem>(); // Assuming ShopSystem is on the same GameObject
-        if (shopSystem == null) Debug.LogError("ShopUIManager: ShopSystem component not found!");
+        // Initially hide the entire shop UI
+        if (mainShopPanel != null && mainShopPanel.transform.parent != null) // Assuming mainShopPanel is the root or child of root
+            mainShopPanel.transform.parent.gameObject.SetActive(false);
+        else if (mainShopPanel != null)
+            mainShopPanel.SetActive(false); // Fallback if no clear parent
     }
 
     void Start()
     {
-        if (mainShopPanel != null) mainShopPanel.SetActive(false); // Start hidden
-        if (buyPanel != null) buyPanel.SetActive(false);
-        if (sellPanel != null) sellPanel.SetActive(false);
+        _shopSystem = FindFirstObjectByType<ShopSystem>();
+        if (_shopSystem == null)
+        {
+            Debug.LogError("ShopUIManager: ShopSystem not found in the scene! UI will not function.");
+            enabled = false; // Disable this script
+            return;
+        }
 
-        // Setup Button Listeners
+        // Assign button listeners
         openBuyPanelButton?.onClick.AddListener(ShowBuyPanel);
         openSellPanelButton?.onClick.AddListener(ShowSellPanel);
-        closeShopButton?.onClick.AddListener(HideShop); // Example
+        backFromBuyButton?.onClick.AddListener(ShowMainShopChoicesPanel);
+        backFromSellButton?.onClick.AddListener(ShowMainShopChoicesPanel);
+        closeShopOverallButton?.onClick.AddListener(CloseEntireShop);
 
-        // Subscribe to PlayerWallet for coin updates
+        // Subscribe to PlayerWallet coin changes
         if (PlayerWallet.Instance != null)
         {
-            PlayerWallet.Instance.OnCoinsChanged += UpdateCoinsDisplay;
-            UpdateCoinsDisplay(PlayerWallet.Instance.CurrentCoins); // Initial display
+            PlayerWallet.Instance.OnCoinsChanged += UpdateCoinDisplay;
+            UpdateCoinDisplay(PlayerWallet.Instance.CurrentCoins); // Initial display
         }
-        else Debug.LogWarning("ShopUIManager: PlayerWallet.Instance not found on Start.");
+        else Debug.LogError("ShopUIManager: PlayerWallet.Instance is null. Coin display will not update.");
+
+        // Subscribe to InventoryController changes to refresh sell panel
+        if (InventoryController.Instance != null)
+        {
+            InventoryController.Instance.OnInventoryRefreshed += RefreshSellPanelIfActive;
+            InventoryController.Instance.OnInventorySlotUpdated += HandleInventorySlotUpdateForSellPanel;
+        }
+        else Debug.LogError("ShopUIManager: InventoryController.Instance is null. Sell panel may not update correctly.");
+
+        if (notificationText != null) notificationText.gameObject.SetActive(false); // Start with notification hidden
+        // Note: The shop typically starts hidden. It's opened by another script (e.g., player interaction).
     }
 
-    void OnDestroy()
+    private void OnDestroy()
     {
-        if (PlayerWallet.Instance != null) PlayerWallet.Instance.OnCoinsChanged -= UpdateCoinsDisplay;
+        if (PlayerWallet.Instance != null) PlayerWallet.Instance.OnCoinsChanged -= UpdateCoinDisplay;
+        if (InventoryController.Instance != null)
+        {
+            InventoryController.Instance.OnInventoryRefreshed -= RefreshSellPanelIfActive;
+            InventoryController.Instance.OnInventorySlotUpdated -= HandleInventorySlotUpdateForSellPanel;
+        }
     }
 
-    public void ShowShop() // Called by player interaction (e.g., talking to NPC)
+    private void HandleInventorySlotUpdateForSellPanel(int slotIndex, ItemData itemData, int quantity)
     {
-        if (mainShopPanel == null) { Debug.LogError("MainShopPanel not assigned!"); return; }
-        mainShopPanel.SetActive(true);
-        ShowBuyPanel(); // Default to buy panel or neither
-        UpdateCoinsDisplay(PlayerWallet.Instance != null ? PlayerWallet.Instance.CurrentCoins : 0);
+        RefreshSellPanelIfActive(); // Refresh sell list if any inventory slot changes
     }
 
-    public void HideShop()
+    void Update()
     {
-        if (mainShopPanel != null) mainShopPanel.SetActive(false);
+        // Handle notification timer
+        if (_notificationTimer > 0)
+        {
+            _notificationTimer -= Time.deltaTime;
+            if (_notificationTimer <= 0 && notificationText != null)
+            {
+                notificationText.gameObject.SetActive(false);
+            }
+        }
     }
 
-    void ShowBuyPanel()
+    // Call this from an external script (e.g., player interaction) to open the shop
+    public void OpenEntireShop()
     {
-        if (buyPanel != null) buyPanel.SetActive(true);
-        if (sellPanel != null) sellPanel.SetActive(false);
+        GameObject shopRoot = mainShopPanel?.transform.parent?.gameObject ?? mainShopPanel;
+        if (shopRoot != null)
+        {
+            shopRoot.SetActive(true);
+            ShowMainShopChoicesPanel(); // Show the initial buy/sell choice panel
+            UpdateCoinDisplay(PlayerWallet.Instance != null ? PlayerWallet.Instance.CurrentCoins : 0);
+
+            if (panelToReactivateOnClose != null)
+                panelToReactivateOnClose.SetActive(false); // Hide the other panel (e.g., main menu)
+        }
+        else Debug.LogError("ShopUIManager: Cannot open shop, mainShopPanel or its parent is not assigned.");
+    }
+
+    public void CloseEntireShop()
+    {
+        GameObject shopRoot = mainShopPanel?.transform.parent?.gameObject ?? mainShopPanel;
+        if (shopRoot != null)
+        {
+            shopRoot.SetActive(false);
+            if (panelToReactivateOnClose != null)
+                panelToReactivateOnClose.SetActive(true); // Show the other panel again
+        }
+        Debug.Log("Shop UI Closed.");
+    }
+
+    // Shows the panel with "Buy Items" and "Sell Items" buttons
+    public void ShowMainShopChoicesPanel()
+    {
+        mainShopPanel?.SetActive(true);
+        buyPanel?.SetActive(false);
+        sellPanel?.SetActive(false);
+    }
+
+    public void ShowBuyPanel()
+    {
+        mainShopPanel?.SetActive(false);
+        buyPanel?.SetActive(true);
+        sellPanel?.SetActive(false);
         PopulateBuyList();
     }
 
-    void ShowSellPanel()
+    public void ShowSellPanel()
     {
-        if (sellPanel != null) sellPanel.SetActive(true);
-        if (buyPanel != null) buyPanel.SetActive(false);
+        mainShopPanel?.SetActive(false);
+        buyPanel?.SetActive(false);
+        sellPanel?.SetActive(true);
         PopulateSellList();
     }
 
-    void PopulateBuyList()
+    private void PopulateBuyList()
     {
-        if (shopSystem == null || buyItemsContainer == null || shopItemUIPrefab == null) return;
-        ClearContainer(buyItemsContainer);
-
-        List<ItemData> itemsToBuy = shopSystem.GetItemsForSale(); // Get from ShopSystem
-        foreach (ItemData item in itemsToBuy)
+        if (buyItemsContainer == null || shopItemUIPrefab == null || _shopSystem == null)
         {
-            if (item.canBeBought) // Double check
+            Debug.LogError("PopulateBuyList: Missing references (buyItemsContainer, shopItemUIPrefab, or _shopSystem).");
+            return;
+        }
+        foreach (Transform child in buyItemsContainer) Destroy(child.gameObject); // Clear previous items
+
+        List<ItemData> itemsToDisplay = _shopSystem.GetItemsForSale();
+        if (itemsToDisplay.Count == 0) Debug.Log("Shop has no items for sale.");
+
+        foreach (ItemData item in itemsToDisplay)
+        {
+            if (item == null || !item.canBeBought) continue;
+
+            GameObject itemGO = Instantiate(shopItemUIPrefab, buyItemsContainer);
+            ShopItemUIController uiController = itemGO.GetComponent<ShopItemUIController>();
+            if (uiController != null)
             {
-                GameObject itemEntry = Instantiate(shopItemUIPrefab, buyItemsContainer);
-                ShopItemUIController entryController = itemEntry.GetComponent<ShopItemUIController>();
-                if (entryController != null)
-                {
-                    entryController.SetupBuyItem(item, shopSystem); // Pass ShopSystem for buy action
-                }
+                uiController.SetupBuyItem(item, _shopSystem); // Pass ShopSystem for buy action
             }
+            else Debug.LogError($"ShopItemUIController script not found on prefab '{shopItemUIPrefab.name}'.");
         }
     }
 
-    void PopulateSellList()
+    private void PopulateSellList()
     {
-        if (InventoryController.Instance == null || sellItemsContainer == null || shopItemUIPrefab == null) return;
-        ClearContainer(sellItemsContainer);
+        if (sellItemsContainer == null || shopItemUIPrefab == null || _shopSystem == null)
+        {
+            Debug.LogError("PopulateSellList: Missing references (sellItemsContainer, shopItemUIPrefab, or _shopSystem).");
+            return;
+        }
+        foreach (Transform child in sellItemsContainer) Destroy(child.gameObject); // Clear previous items
 
-        // Get sellable items directly from the Player's InventoryController
+        if (InventoryController.Instance == null)
+        {
+            Debug.LogError("PopulateSellList: InventoryController.Instance is null.");
+            return;
+        }
+
+        bool foundSellableItem = false;
         for (int i = 0; i < InventoryController.Instance.inventorySize; i++)
         {
-            ItemData item = InventoryController.Instance.GetItemDataInSlot(i);
+            ItemData itemData = InventoryController.Instance.GetItemDataInSlot(i);
             int quantity = InventoryController.Instance.GetQuantityInSlot(i);
 
-            if (item != null && item.canBeSold && quantity > 0)
+            if (itemData != null && quantity > 0 && itemData.canBeSold && itemData.sellPrice > 0)
             {
-                GameObject itemEntry = Instantiate(shopItemUIPrefab, sellItemsContainer);
-                ShopItemUIController entryController = itemEntry.GetComponent<ShopItemUIController>();
-                if (entryController != null)
+                foundSellableItem = true;
+                GameObject itemGO = Instantiate(shopItemUIPrefab, sellItemsContainer);
+                ShopItemUIController uiController = itemGO.GetComponent<ShopItemUIController>();
+                if (uiController != null)
                 {
-                    entryController.SetupSellItem(item, quantity, shopSystem); // Pass ShopSystem for sell action
+                    uiController.SetupSellItem(itemData, quantity, _shopSystem); // Pass ShopSystem for sell action
                 }
+                else Debug.LogError($"ShopItemUIController script not found on prefab '{shopItemUIPrefab.name}'.");
             }
+        }
+        if (!foundSellableItem) Debug.Log("Player has no sellable items.");
+    }
+
+    private void RefreshSellPanelIfActive()
+    {
+        if (sellPanel != null && sellPanel.activeSelf)
+        {
+            PopulateSellList();
         }
     }
 
-    void ClearContainer(RectTransform container)
+    private void UpdateCoinDisplay(int newAmount)
     {
-        foreach (Transform child in container) Destroy(child.gameObject);
-    }
-
-    public void UpdateCoinsDisplay(int currentCoins)
-    {
-        if (playerCoinsText != null) playerCoinsText.text = "Coins: " + currentCoins.ToString();
+        if (playerCoinsText != null)
+        {
+            playerCoinsText.text = $"Coins: {newAmount}";
+        }
     }
 
     public void ShowNotification(string message)
     {
-        if (notificationText != null)
-        {
-            notificationText.text = message;
-            notificationText.gameObject.SetActive(true);
-            CancelInvoke(nameof(HideNotification)); // Cancel previous hide invoke
-            Invoke(nameof(HideNotification), notificationDisplayTime);
-        }
-    }
-
-    void HideNotification()
-    {
-        if (notificationText != null) notificationText.gameObject.SetActive(false);
+        if (notificationText == null) return;
+        notificationText.text = message;
+        notificationText.gameObject.SetActive(true);
+        _notificationTimer = notificationDisplayTime; // Reset timer
     }
 }

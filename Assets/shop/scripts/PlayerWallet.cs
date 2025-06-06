@@ -65,12 +65,12 @@ public class PlayerWallet : MonoBehaviour
 
     private void LoadCoins()
     {
-        _currentCoins = PlayerPrefs.GetInt(COINS_PREFS_KEY, 100); // Start with 100 coins for testing
+        _currentCoins = PlayerPrefs.GetInt(COINS_PREFS_KEY, 200); // Start with 100 coins for testing
         OnCoinsChanged?.Invoke(_currentCoins); // Notify UI on load
     }
 
     [ContextMenu("DEBUG: Add 100 Coins")]
-    public void DebugAdd100Coins() => AddCoins(100);
+    public void DebugAdd100Coins() => AddCoins(200);
     [ContextMenu("DEBUG: Reset Coins")]
     public void DebugResetCoins() { PlayerPrefs.DeleteKey(COINS_PREFS_KEY); LoadCoins(); }
 }

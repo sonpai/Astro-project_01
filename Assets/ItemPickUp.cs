@@ -1,25 +1,48 @@
-// ItemPickup.cs (Example)
+// ItemPickup.cs
 using UnityEngine;
+
+[RequireComponent(typeof(Collider2D))] // Ensures there is a collider
 public class ItemPickup : MonoBehaviour
 {
-    public ItemData itemToGive; // Assign your ItemData SO in the Inspector
+    public ItemData itemDataToGive;
     public int quantity = 1;
 
-    private void OnTriggerEnter(Collider other) // Or OnCollisionEnter, or on click
+    [SerializeField]
+    private SpriteRenderer spriteRenderer;
+
+    private bool _canBePickedUp = true;
+
+    private void Awake()
     {
-        if (other.CompareTag("Player")) // Assuming player has "Player" tag
+        if (spriteRenderer == null)
         {
-            if (InventoryController.Instance != null && itemToGive != null)
+            spriteRenderer = GetComponent<SpriteRenderer>();
+        }
+    }
+
+    // Called by InventoryController when dropping an item
+    public void Initialize(ItemData itemData, int qty)
+    {
+        itemDataToGive = itemData;
+        quantity = qty;
+        if (spriteRenderer != null && itemData != null)
+        {
+            spriteRenderer.sprite = itemData.itemIcon;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (!_canBePickedUp) return;
+
+        if (other.CompareTag("Player")) // Make sure your player GameObject has the "Player" tag
+        {
+            if (InventoryController.Instance != null && itemDataToGive != null)
             {
-                bool added = InventoryController.Instance.AddItem(itemToGive, quantity);
-                if (added)
+                bool addedSuccessfully = InventoryController.Instance.AddItem(itemDataToGive, quantity);
+                if (addedSuccessfully)
                 {
-                    Debug.Log($"Picked up {quantity}x {itemToGive.itemName}");
-                    Destroy(gameObject); // Remove the item from the world
-                }
-                else
-                {
-                    Debug.LogWarning($"Could not pick up {itemToGive.itemName}. Inventory might be full.");
+                    Destroy(gameObject); // Item picked up, remove from world
                 }
             }
         }

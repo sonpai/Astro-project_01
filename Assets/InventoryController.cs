@@ -413,4 +413,20 @@ public class InventoryController : MonoBehaviour
         Debug.Log("DEBUG: Inventory Save Data Cleared. Runtime inventory reset. UI refreshed if active.");
     }
     #endregion
+
+
+
+    // Add this method inside InventoryController.cs
+    public int GetTotalQuantityOfItem(string itemID)
+    {
+        int total = 0;
+        foreach (var slot in _inventorySlots)
+        {
+            if (slot.itemID == itemID)
+            {
+                total += slot.quantity;
+            }
+        }
+        return total;
+    }
 }

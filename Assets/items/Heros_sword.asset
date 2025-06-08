@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0472693d9a7556d4d82beb19954db960, type: 3}
+  m_Name: Heros_sword
+  m_EditorClassIdentifier: 
+  itemID: Heros_sword
+  itemName: sword
+  itemIcon: {fileID: 21300000, guid: dd3631e297d7ef341bfc48751be7ca9d, type: 3}
+  description: Item Description.
+  isStackable: 0
+  maxStackSize: 1
+  canBeBought: 0
+  buyPrice: 10
+  canBeSold: 0
+  sellPrice: 5
+  nextLevelUpgrade: {fileID: 0}
+  upgradeCost: 50
+  upgradeRequirements:
+  - requiredItem: {fileID: 11400000, guid: 175b2a8c99b11af4c8404855d3155eb0, type: 2}
+    requiredQuantity: 5

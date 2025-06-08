@@ -76,6 +76,7 @@ public class UIInventoryPage : MonoBehaviour
 
         }
         listOfUIItems[currentlyDraggedItemIndex].SetData(index == 0 ? image : image2, quantity);
+        Debug.Log("item swap ");
         listOfUIItems[index].SetData(currentlyDraggedItemIndex == 0 ? image : image2, quantity);
         mouseFollower.Toggle(false);
         currentlyDraggedItemIndex = -1;

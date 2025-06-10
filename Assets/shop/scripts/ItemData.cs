@@ -35,16 +35,10 @@ public class ItemData : ScriptableObject
     [Header("Item Type")]
     public ItemType itemType;
 
-    [Header("Item Stats")]
-    public List<StatModifier> statModifiers;
+    //[Header("Item Stats")]
+    //public List<StatModifier> statModifiers;
 }
 
-public enum ItemType
-{
-    Weapon,
-    Armor,
-    Consumable,
-    Material, // For upgrade requirements like "Goblin Ear"
-}
+
 
 

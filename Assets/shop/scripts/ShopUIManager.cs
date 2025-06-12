@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI; // Required for Button
 using TMPro;          // Required for TextMeshProUGUI
 using System.Collections.Generic;
+using System.Collections;
 
 public class ShopUIManager : MonoBehaviour
 {
@@ -217,7 +218,7 @@ public class ShopUIManager : MonoBehaviour
         }
 
         bool foundSellableItem = false;
-        for (int i = 0; i < InventoryController.Instance.inventorySize; i++)
+        for (int i = 0; i < InventoryController.Instance.InventorySize; i++)
         {
             ItemData itemData = InventoryController.Instance.GetItemDataInSlot(i);
             int quantity = InventoryController.Instance.GetQuantityInSlot(i);

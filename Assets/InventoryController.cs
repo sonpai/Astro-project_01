@@ -1,6 +1,8 @@
 // InventoryController.cs
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
+
 
 public class InventoryController : MonoBehaviour
 {
@@ -9,8 +11,8 @@ public class InventoryController : MonoBehaviour
     [Header("UI Link")]
     [SerializeField] private UIInventoryPage inventoryUI; // Assign your primary UIInventoryPage here if it's always in the same scene as the controller
 
-    [Header("Settings")]
-    public int inventorySize = 24; // Default size, adjust in Inspector
+    [SerializeField]
+    private InventorySO inventoryData;
 
     // --- Private Data ---
     private List<InventorySlot> _inventorySlots;
@@ -18,6 +20,8 @@ public class InventoryController : MonoBehaviour
     private bool _hasAssignedUIToController = false;
 
     // --- Public Events ---
+    public event System.Action<Dictionary<int, InventoryItem>> OnInventoryUpdated;
+    public int InventorySize => inventoryData.Size;
     public event System.Action<int, ItemData, int> OnInventorySlotUpdated; // slotIndex, itemData, newQuantity
     public event System.Action OnInventoryRefreshed; // For full UI refresh
 
@@ -37,7 +41,7 @@ public class InventoryController : MonoBehaviour
 
             // For testing: attempt to add an item shortly after start
             // Ensure ItemDataManager is ready and an item "potion_health_01" exists
-           // Invoke(nameof(DebugForceAddItem), 2.5f); // Increased from 1.5f
+            // Invoke(nameof(DebugForceAddItem), 2.5f); // Increased from 1.5f
         }
         else
         {
@@ -54,30 +58,54 @@ public class InventoryController : MonoBehaviour
         }
     }
 
+    //private void Update()
+    //{
+    //    // Attempt to find and assign a UI if none is currently active/valid
+    //    // This is mainly for scenarios where UI might be dynamically loaded/unloaded
+    //    // or if the controller starts before the UI is ready.
+    //    if (inventoryUI == null || !inventoryUI.gameObject.scene.isLoaded)
+    //    {
+    //        UIInventoryPage sceneUI = FindFirstObjectByType<UIInventoryPage>();
+    //        if (sceneUI != null && sceneUI.gameObject.activeInHierarchy)
+    //        {
+    //            AssignAndInitializeUI(sceneUI);
+    //        }
+    //    }
+
+    //    // If, after checks, we still don't have a valid UI, don't process input for it
+    //    if (inventoryUI == null || !inventoryUI.gameObject.scene.isLoaded) return;
+
+    //    // Toggle inventory UI with 'I' key
+    //    if (Input.GetKeyDown(KeyCode.I))
+    //    {
+    //        ToggleInventoryPanel();
+    //        foreach (var item in inventoryData.GetCurrentInventoryState())
+    //        {
+    //            inventoryUI.UpdateData(item.Key, item.Value, item.ItemImage, item.Value.quantity);
+
+    //        }
+
+    //    }
+    //}
+    // This is the CORRECTED way
     private void Update()
     {
-        // Attempt to find and assign a UI if none is currently active/valid
-        // This is mainly for scenarios where UI might be dynamically loaded/unloaded
-        // or if the controller starts before the UI is ready.
-        if (inventoryUI == null || !inventoryUI.gameObject.scene.isLoaded)
-        {
-            UIInventoryPage sceneUI = FindFirstObjectByType<UIInventoryPage>();
-            if (sceneUI != null && sceneUI.gameObject.activeInHierarchy)
-            {
-                AssignAndInitializeUI(sceneUI);
-            }
-        }
-        
-        // If, after checks, we still don't have a valid UI, don't process input for it
-        if (inventoryUI == null || !inventoryUI.gameObject.scene.isLoaded) return;
-
-        // Toggle inventory UI with 'I' key
+        // Example toggle with 'I' key
         if (Input.GetKeyDown(KeyCode.I))
         {
-            ToggleInventoryPanel();
+            if (inventoryUI != null && !inventoryUI.gameObject.activeSelf)
+            {
+                inventoryUI.Show();
+                // Notify UI to update with the latest data
+                OnInventoryUpdated?.Invoke(inventoryData.GetCurrentInventoryState());
+            }
+            else
+            {
+                inventoryUI.Hide();
+            }
         }
     }
-    #endregion
+
 
     #region UI Management
     public void AssignAndInitializeUI(UIInventoryPage uiPage)
@@ -91,7 +119,7 @@ public class InventoryController : MonoBehaviour
         if (this.inventoryUI != uiPage || !_hasAssignedUIToController)
         {
             this.inventoryUI = uiPage;
-            this.inventoryUI.InitializeInventoryUI(inventorySize);
+            this.inventoryUI.InitializeInventoryUI(inventoryData.Size);
             OnInventoryRefreshed?.Invoke();
             _hasAssignedUIToController = true;
             Debug.Log($"InventoryController: UIInventoryPage '{uiPage.gameObject.name}' assigned and initialized.");
@@ -125,12 +153,12 @@ public class InventoryController : MonoBehaviour
     #region Inventory Initialization and Data Access
     private void InitializeInventory()
     {
-        _inventorySlots = new List<InventorySlot>(inventorySize);
-        for (int i = 0; i < inventorySize; i++)
+        _inventorySlots = new List<InventorySlot>(inventoryData.Size);
+        for (int i = 0; i < inventoryData.Size; i++)
         {
             _inventorySlots.Add(new InventorySlot(null, 0)); // itemID, quantity
         }
-        Debug.Log($"InventoryController initialized with {inventorySize} slots.");
+        Debug.Log($"InventoryController initialized with {inventoryData.Size} slots.");
     }
 
     public ItemData GetItemDataInSlot(int slotIndex)
@@ -196,7 +224,7 @@ public class InventoryController : MonoBehaviour
                 if (IsSlotEmpty(i))
                 {
                     int amountForNewSlot = itemToAdd.isStackable ? Mathf.Min(remainingQuantity, itemToAdd.maxStackSize) : 1;
-                    
+
                     _inventorySlots[i].itemID = itemToAdd.itemID;
                     _inventorySlots[i].quantity = amountForNewSlot;
                     OnInventorySlotUpdated?.Invoke(i, itemToAdd, _inventorySlots[i].quantity);
@@ -325,19 +353,19 @@ public class InventoryController : MonoBehaviour
 
     public void LoadInventory()
     {
-        if (_inventorySlots == null || _inventorySlots.Capacity < inventorySize)
+        if (_inventorySlots == null || _inventorySlots.Capacity < inventoryData.Size)
         {
             InitializeInventory(); // Ensures _inventorySlots exists and is correctly sized
         }
         else // Clear existing runtime data if list already exists
         {
-            for(int i=0; i < _inventorySlots.Count; i++)
+            for (int i = 0; i < _inventorySlots.Count; i++)
             {
                 _inventorySlots[i].itemID = null;
                 _inventorySlots[i].quantity = 0;
             }
-             while (_inventorySlots.Count < inventorySize) _inventorySlots.Add(new InventorySlot(null, 0)); // Grow if needed
-             while (_inventorySlots.Count > inventorySize) _inventorySlots.RemoveAt(_inventorySlots.Count -1); // Shrink if needed
+            while (_inventorySlots.Count < inventoryData.Size) _inventorySlots.Add(new InventorySlot(null, 0)); // Grow if needed
+            while (_inventorySlots.Count > inventoryData.Size) _inventorySlots.RemoveAt(_inventorySlots.Count - 1); // Shrink if needed
 
         }
 
@@ -349,7 +377,7 @@ public class InventoryController : MonoBehaviour
                 InventorySaveWrapper wrapper = JsonUtility.FromJson<InventorySaveWrapper>(json);
                 if (wrapper != null && wrapper.slotsToSave != null)
                 {
-                    for (int i = 0; i < inventorySize; i++)
+                    for (int i = 0; i < inventoryData.Size; i++)
                     {
                         if (i < wrapper.slotsToSave.Count && i < _inventorySlots.Count)
                         {
@@ -399,7 +427,7 @@ public class InventoryController : MonoBehaviour
     //}
 
     [ContextMenu("DEBUG: Add Test Potion")]
-   // private void DebugAddTestPotionContextMenu() => DebugForceAddItem();
+    // private void DebugAddTestPotionContextMenu() => DebugForceAddItem();
 
     [ContextMenu("DEBUG: Clear Inventory Save Data & Reset Runtime")]
     private void DebugClearInventoryAndReset()
@@ -412,7 +440,6 @@ public class InventoryController : MonoBehaviour
         }
         Debug.Log("DEBUG: Inventory Save Data Cleared. Runtime inventory reset. UI refreshed if active.");
     }
-    #endregion
 
 
 
@@ -429,4 +456,229 @@ public class InventoryController : MonoBehaviour
         }
         return total;
     }
+    #endregion
+
 }
+#endregion
+
+
+//using UnityEngine;
+//using System.Collections.Generic;
+//using System.Linq;
+
+//public class InventoryController : MonoBehaviour
+//{
+//    public static InventoryController Instance { get; private set; }
+
+//    [Header("Settings")]
+//    public int inventorySize = 24;
+
+//    [Header("UI Link")]
+//    private UIInventoryPage _currentInventoryUI;
+
+//    // --- Private Data ---
+//    private List<InventorySlot> _inventorySlots;
+//    private const string INVENTORY_SAVE_KEY = "PlayerInventory_Main";
+
+//    // --- Public Events ---
+//    public event System.Action<int, ItemData, int> OnInventorySlotUpdated;
+//    public event System.Action OnInventoryRefreshed;
+
+//    // --- Public Properties ---
+//    public List<InventorySlot> InventorySlots_ReadOnly => new List<InventorySlot>(_inventorySlots);
+//    public int InventorySize => inventorySize;
+
+//    private void Awake()
+//    {
+//        if (Instance == null)
+//        {
+//            Instance = this;
+//            DontDestroyOnLoad(gameObject);
+//            InitializeInventory();
+//        }
+//        else
+//        {
+//            Destroy(gameObject);
+//        }
+//    }
+
+//    private void Start()
+//    {
+//        LoadInventory();
+//    }
+
+//    private void Update()
+//    {
+//        if (Input.GetKeyDown(KeyCode.I))
+//        {
+//            if (_currentInventoryUI != null)
+//            {
+//                if (_currentInventoryUI.gameObject.activeSelf)
+//                {
+//                    _currentInventoryUI.Hide();
+//                }
+//                else
+//                {
+//                    OnInventoryRefreshed?.Invoke();
+//                    _currentInventoryUI.Show();
+//                }
+//            }
+//        }
+//    }
+
+//    private void InitializeInventory()
+//    {
+//        _inventorySlots = new List<InventorySlot>();
+//        for (int i = 0; i < inventorySize; i++)
+//        {
+//            _inventorySlots.Add(new InventorySlot(null, 0));
+//        }
+//    }
+
+//    public void AssignAndInitializeUI(UIInventoryPage uiPage)
+//    {
+//        _currentInventoryUI = uiPage;
+//        if (_currentInventoryUI != null)
+//        {
+//            _currentInventoryUI.InitializeInventoryUI(inventorySize);
+//            OnInventoryRefreshed?.Invoke();
+//        }
+//    }
+
+//    public bool AddItem(ItemData itemToAdd, int quantity = 1)
+//    {
+//        if (itemToAdd == null || quantity <= 0) return false;
+
+//        // Try to stack first
+//        if (itemToAdd.isStackable)
+//        {
+//            for (int i = 0; i < _inventorySlots.Count; i++)
+//            {
+//                if (!_inventorySlots[i].IsEmpty() && _inventorySlots[i].itemID == itemToAdd.itemID)
+//                {
+//                    int spaceAvailable = itemToAdd.maxStackSize - _inventorySlots[i].quantity;
+//                    if (spaceAvailable > 0)
+//                    {
+//                        int amountToAdd = Mathf.Min(quantity, spaceAvailable);
+//                        _inventorySlots[i].quantity += amountToAdd;
+//                        quantity -= amountToAdd;
+//                        OnInventorySlotUpdated?.Invoke(i, itemToAdd, _inventorySlots[i].quantity);
+//                    }
+//                }
+//                if (quantity <= 0) { SaveInventory(); return true; }
+//            }
+//        }
+
+//        // Add to new slots
+//        if (quantity > 0)
+//        {
+//            for (int i = 0; i < _inventorySlots.Count; i++)
+//            {
+//                if (_inventorySlots[i].IsEmpty())
+//                {
+//                    _inventorySlots[i].itemID = itemToAdd.itemID;
+//                    int amountToAdd = Mathf.Min(quantity, itemToAdd.maxStackSize);
+//                    _inventorySlots[i].quantity = amountToAdd;
+//                    quantity -= amountToAdd;
+//                    OnInventorySlotUpdated?.Invoke(i, itemToAdd, _inventorySlots[i].quantity);
+//                    if (quantity <= 0) { SaveInventory(); return true; }
+//                }
+//            }
+//        }
+
+//        SaveInventory();
+//        return quantity <= 0;
+//    }
+
+//    public bool RemoveItemFromSlot(int slotIndex, int quantity = 1)
+//    {
+//        if (IsSlotEmpty(slotIndex) || quantity <= 0) return false;
+
+//        _inventorySlots[slotIndex].quantity -= quantity;
+
+//        if (_inventorySlots[slotIndex].quantity <= 0)
+//        {
+//            _inventorySlots[slotIndex] = new InventorySlot(null, 0); // Clear slot
+//            OnInventorySlotUpdated?.Invoke(slotIndex, null, 0);
+//        }
+//        else
+//        {
+//            ItemData data = GetItemDataInSlot(slotIndex);
+//            OnInventorySlotUpdated?.Invoke(slotIndex, data, _inventorySlots[slotIndex].quantity);
+//        }
+//        SaveInventory();
+//        return true;
+//    }
+
+//    public bool RemoveItemByData(ItemData itemToRemove, int quantity)
+//    {
+//        int totalRemoved = 0;
+//        for (int i = _inventorySlots.Count - 1; i >= 0; i--)
+//        {
+//            if (!_inventorySlots[i].IsEmpty() && _inventorySlots[i].itemID == itemToRemove.itemID)
+//            {
+//                int amountToRemove = Mathf.Min(quantity - totalRemoved, _inventorySlots[i].quantity);
+//                if (RemoveItemFromSlot(i, amountToRemove))
+//                {
+//                    totalRemoved += amountToRemove;
+//                }
+//            }
+//            if (totalRemoved >= quantity) break;
+//        }
+//        return totalRemoved >= quantity;
+//    }
+
+//    public void SwapItems(int indexA, int indexB)
+//    {
+//        InventorySlot temp = _inventorySlots[indexA];
+//        _inventorySlots[indexA] = _inventorySlots[indexB];
+//        _inventorySlots[indexB] = temp;
+//        OnInventoryRefreshed?.Invoke();
+//        SaveInventory();
+//    }
+
+//    public void UseItem(int slotIndex)
+//    {
+//        ItemData itemToUse = GetItemDataInSlot(slotIndex);
+//        if (itemToUse == null) return;
+
+//        Debug.Log($"Using {itemToUse.itemName}");
+//        // Add Use Logic here (e.g., equipping, consuming)
+//    }
+
+//    public int GetTotalQuantityOfItem(string itemID)
+//    {
+//        return _inventorySlots.Where(slot => slot.itemID == itemID).Sum(slot => slot.quantity);
+//    }
+
+//    public bool IsSlotEmpty(int index) => _inventorySlots[index].IsEmpty();
+//    public ItemData GetItemDataInSlot(int index) => IsSlotEmpty(index) ? null : ItemDataManager.Instance.GetItemByID(_inventorySlots[index].itemID);
+//    public int GetQuantityInSlot(int index) => IsSlotEmpty(index) ? 0 : _inventorySlots[index].quantity;
+
+//    private void SaveInventory()
+//    {
+//        string json = JsonUtility.ToJson(new InventorySaveData { inventorySlots = _inventorySlots });
+//        PlayerPrefs.SetString(INVENTORY_SAVE_KEY, json);
+//        PlayerPrefs.Save();
+//    }
+
+//    private void LoadInventory()
+//    {
+//        if (PlayerPrefs.HasKey(INVENTORY_SAVE_KEY))
+//        {
+//            string json = PlayerPrefs.GetString(INVENTORY_SAVE_KEY);
+//            InventorySaveData loadedData = JsonUtility.FromJson<InventorySaveData>(json);
+//            if (loadedData != null && loadedData.inventorySlots.Count == inventorySize)
+//            {
+//                _inventorySlots = loadedData.inventorySlots;
+//            }
+//        }
+//    }
+
+//    [System.Serializable]
+//    private class InventorySaveData
+//    {
+//        public List<InventorySlot> inventorySlots;
+//    }
+//}
+

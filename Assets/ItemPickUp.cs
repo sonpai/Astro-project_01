@@ -39,6 +39,21 @@ public class ItemPickUp : MonoBehaviour
         }
     }
 
+    // Add this new method inside your ItemPickUp.cs class
+
+    public void Initialize(ItemData itemData, int qty)
+    {
+        // Set the data for this pickup
+        itemIDToGive = itemData.itemID;
+        quantityToGive = qty;
+
+        // Update the visual sprite to match the item
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.sprite = itemData.itemIcon;
+        }
+    }
+
     // Or, you might have an interaction system that calls this method
     public void TryGiveItemToPlayer()
     {

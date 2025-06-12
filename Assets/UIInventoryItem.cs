@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems; // Required for event system interfaces
 
-public class UIInventoryItem : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
+public class UIInventoryItem : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler 
 {
     [SerializeField] private Image itemImage;
     [SerializeField] private TMP_Text quantityTxt;
@@ -77,14 +77,6 @@ public class UIInventoryItem : MonoBehaviour, IPointerClickHandler, IBeginDragHa
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (_empty && eventData.button != PointerEventData.InputButton.Right) // Don't invoke left click on empty unless needed
-        {
-            Debug.Log("3"); // <<< ADD THIS LOG
-
-            // Optionally, deselect other items or handle empty slot click
-            // OnItemClicked?.Invoke(this); // If you want empty slots to be "selectable"
-            return;
-        }
 
         if (eventData.button == PointerEventData.InputButton.Right)
         {

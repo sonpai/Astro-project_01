@@ -26,7 +26,7 @@ public class ItemData : ScriptableObject
     [Tooltip("The item this one will turn into when upgraded. Leave empty if not upgradable.")]
     public ItemData nextLevelUpgrade;
 
-    [Tooltip("The cost in coins to perform the upgrade.")]
+    //[Tooltip("The cost in coins to perform the upgrade.")]
     public int upgradeCost;
 
     [Tooltip("A list of all materials and quantities needed for the upgrade.")]

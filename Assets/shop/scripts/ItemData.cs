@@ -39,11 +39,13 @@
 //    //public List<StatModifier> statModifiers;
 //}
 
-
+// ItemData.cs
 using UnityEngine;
 using System.Collections.Generic;
 
+// These enums can be used by any script
 //public enum ItemType { Weapon, Armor, Consumable, Material }
+//public enum StatType { Damage, Armor }
 
 [CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Item Data")]
 public class ItemData : ScriptableObject

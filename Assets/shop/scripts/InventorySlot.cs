@@ -17,7 +17,8 @@
 //    }
 //}
 
-[System.Serializable]
+// InventorySlot.cs
+[System.Serializable] // Makes it visible in the Inspector and allows saving to JSON
 public class InventorySlot
 {
     public string itemID;
@@ -29,5 +30,8 @@ public class InventorySlot
         quantity = qty;
     }
 
-    public bool IsEmpty() => string.IsNullOrEmpty(itemID) || quantity <= 0;
+    public bool IsEmpty()
+    {
+        return string.IsNullOrEmpty(itemID) || quantity <= 0;
+    }
 }

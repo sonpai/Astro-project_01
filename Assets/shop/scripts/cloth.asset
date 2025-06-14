@@ -15,8 +15,11 @@ MonoBehaviour:
   itemID: 2
   itemName: cloth
   itemIcon: {fileID: 21300000, guid: f92f5d6b471362a448ce1b17ed3d6a8c, type: 3}
-  description: 
-  buyPrice: 10
-  sellPrice: 5
-  canBeSold: 1
+  description: this is a cloth
+  itemType: 0
+  isStackable: 1
+  maxStackSize: 99
   canBeBought: 1
+  buyPrice: 10
+  canBeSold: 1
+  sellPrice: 5

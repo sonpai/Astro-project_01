@@ -15,8 +15,11 @@ MonoBehaviour:
   itemID: 3
   itemName: crystals
   itemIcon: {fileID: 6505026738284537468, guid: d076a14f7683beb47b6fc9ab51152c92, type: 3}
-  description: 
-  buyPrice: 10
-  sellPrice: 5
-  canBeSold: 1
+  description: this is a crystal
+  itemType: 0
+  isStackable: 1
+  maxStackSize: 99
   canBeBought: 1
+  buyPrice: 10
+  canBeSold: 1
+  sellPrice: 5

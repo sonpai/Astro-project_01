@@ -54,7 +54,7 @@ public class ItemData : ScriptableObject
     public string itemName;
     public Sprite itemIcon;
     [TextArea] public string description;
-    public ItemType itemType;
+    public ItemTypes itemType;
 
     [Header("Stacking")]
     public bool isStackable = true;
@@ -65,5 +65,7 @@ public class ItemData : ScriptableObject
     public int buyPrice = 10;
     public bool canBeSold = true;
     public int sellPrice = 5;
+
+  
 }
 

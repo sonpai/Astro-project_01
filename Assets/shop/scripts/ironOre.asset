@@ -15,8 +15,11 @@ MonoBehaviour:
   itemID: 6
   itemName: iron ore
   itemIcon: {fileID: 21300000, guid: 79a5d1e0e28d35f4f92aac75f9a8cdb8, type: 3}
-  description: 
-  buyPrice: 10
-  sellPrice: 5
-  canBeSold: 1
+  description: iron ore
+  itemType: 2
+  isStackable: 1
+  maxStackSize: 99
   canBeBought: 1
+  buyPrice: 10
+  canBeSold: 1
+  sellPrice: 5

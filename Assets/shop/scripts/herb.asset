@@ -15,8 +15,11 @@ MonoBehaviour:
   itemID: 5
   itemName: herb
   itemIcon: {fileID: 21300000, guid: 27184fb4b1d0c8349b37db6cfd8a6dbb, type: 3}
-  description: 
-  buyPrice: 10
-  sellPrice: 5
-  canBeSold: 1
+  description: this is herb
+  itemType: 0
+  isStackable: 1
+  maxStackSize: 99
   canBeBought: 1
+  buyPrice: 10
+  canBeSold: 1
+  sellPrice: 5

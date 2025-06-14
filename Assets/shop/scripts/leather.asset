@@ -15,8 +15,11 @@ MonoBehaviour:
   itemID: 7
   itemName: leather
   itemIcon: {fileID: 21300000, guid: 88115744e451fff94a48cd1dde12c729, type: 3}
-  description: 
-  buyPrice: 10
-  sellPrice: 5
-  canBeSold: 1
+  description: this is leather
+  itemType: 0
+  isStackable: 1
+  maxStackSize: 99
   canBeBought: 1
+  buyPrice: 10
+  canBeSold: 1
+  sellPrice: 5

@@ -21,7 +21,7 @@ public class UIInventoryDescription : MonoBehaviour
     }
     public void ResetDescription()
     {
-        this.itemImage.gameObject.SetActive(false);
+        //this.itemImage.gameObject.SetActive(false);
         this.title.text = "";
         this.description.text = "";
     }

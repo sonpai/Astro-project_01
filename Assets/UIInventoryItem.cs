@@ -6,7 +6,9 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 
-public class UIInventoryItem : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IDropHandler
+//public class UIInventoryItem : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IDropHandler
+public class UIInventoryItem : MonoBehaviour, IPointerClickHandler
+
 {
     [SerializeField] private Image itemImage;
     [SerializeField] private TMP_Text quantityTxt;
@@ -68,7 +70,7 @@ public class UIInventoryItem : MonoBehaviour, IPointerClickHandler, IBeginDragHa
         if (!_empty) OnItemBeginDrag?.Invoke(this);
     }
 
-    public void OnEndDrag(PointerEventData eventData) => OnItemEndDrag?.Invoke(this);
+    //public void OnEndDrag(PointerEventData eventData) => OnItemEndDrag?.Invoke(this);
     public void OnDrop(PointerEventData eventData) => OnItemDroppedOn?.Invoke(this);
-    public void OnDrag(PointerEventData eventData) { } // Must be implemented for the interface
+    //public void OnDrag(PointerEventData eventData) { } // Must be implemented for the interface
 }

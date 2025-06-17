@@ -1,81 +1,140 @@
-//// ShopItemUIController.cs
 //using UnityEngine;
 //using UnityEngine.UI;
 //using TMPro;
 
 //public class ShopItemUIController : MonoBehaviour
 //{
-//    [SerializeField] private Image itemIconImage;
+//    [SerializeField] private Image itemIcon;
 //    [SerializeField] private TMP_Text itemNameText;
 //    [SerializeField] private TMP_Text itemPriceText;
-//    [SerializeField] private TMP_Text itemQuantityText; // For sell panel primarily
-//    [SerializeField] private Button actionButton; // This will be "Buy" or "Sell"
+//    [SerializeField] private Button actionButton;
 
-//    private ItemData _currentItemData;
-//    private int _currentQuantityInPlayerInventory; // Only relevant for selling
-//    private ShopSystem _shopSystemInstance;
-//    private bool _isBuyMode;
+//    private ItemData _item;
+//    private ShopSystem _shopSystem;
 
-//    public void SetupBuyItem(ItemData data, ShopSystem shopSystem)
+//    // Configure the UI for an item the player can BUY
+//    public void SetupBuyItem(ItemData item, ShopSystem shopSystem)
 //    {
-//        _currentItemData = data;
-//        _shopSystemInstance = shopSystem;
-//        _isBuyMode = true;
+//        _item = item;
+//        _shopSystem = shopSystem;
 
-//        if (itemIconImage != null) itemIconImage.sprite = data.itemIcon;
-//        if (itemNameText != null) itemNameText.text = data.itemName;
-//        if (itemPriceText != null) itemPriceText.text = "Price: " + data.buyPrice.ToString();
-//        if (itemQuantityText != null) itemQuantityText.gameObject.SetActive(false); // Not needed for buy list
+//        itemIcon.sprite = _item.itemIcon;
+//        itemNameText.text = _item.itemName;
+//        itemPriceText.text = $"{_item.buyPrice} Coins";
 
-//        actionButton?.onClick.RemoveAllListeners();
-//        actionButton?.onClick.AddListener(OnActionButtonClicked);
-//        if (actionButton?.GetComponentInChildren<TMP_Text>() != null)
-//            actionButton.GetComponentInChildren<TMP_Text>().text = "Buy";
+//        actionButton.onClick.RemoveAllListeners();
+//        actionButton.onClick.AddListener(HandleBuyItem);
+
+//        // You might want to change the button text as well
+//        actionButton.GetComponentInChildren<TMP_Text>().text = "Buy";
 //    }
 
-//    public void SetupSellItem(ItemData data, int quantity, ShopSystem shopSystem)
+//    // Configure the UI for an item the player can SELL
+//    public void SetupSellItem(ItemData item, int quantity, ShopSystem shopSystem)
 //    {
-//        _currentItemData = data;
-//        _currentQuantityInPlayerInventory = quantity;
-//        _shopSystemInstance = shopSystem;
-//        _isBuyMode = false;
+//        _item = item;
+//        _shopSystem = shopSystem;
 
-//        if (itemIconImage != null) itemIconImage.sprite = data.itemIcon;
-//        if (itemNameText != null) itemNameText.text = data.itemName;
-//        if (itemPriceText != null) itemPriceText.text = "Sell for: " + data.sellPrice.ToString();
+//        itemIcon.sprite = _item.itemIcon;
+//        // Show quantity for sellable items
+//        itemNameText.text = $"{_item.itemName} (x{quantity})";
+//        itemPriceText.text = $"{_item.sellPrice} Coins";
 
-//        if (itemQuantityText != null)
-//        {
-//            itemQuantityText.gameObject.SetActive(true);
-//            itemQuantityText.text = "Qty: " + quantity.ToString();
-//        }
+//        actionButton.onClick.RemoveAllListeners();
+//        actionButton.onClick.AddListener(HandleSellItem);
 
-//        actionButton?.onClick.RemoveAllListeners();
-//        actionButton?.onClick.AddListener(OnActionButtonClicked);
-//        if (actionButton?.GetComponentInChildren<TMP_Text>() != null)
-//            actionButton.GetComponentInChildren<TMP_Text>().text = "Sell 1"; // Or "Sell All" with more logic
+//        actionButton.GetComponentInChildren<TMP_Text>().text = "Sell";
 //    }
 
-//    void OnActionButtonClicked()
+//    private void HandleBuyItem()
 //    {
-//        if (_currentItemData == null || _shopSystemInstance == null) return;
-
-//        if (_isBuyMode)
+//        if (_item != null && _shopSystem != null)
 //        {
-//            _shopSystemInstance.PlayerBuysItem(_currentItemData);
-//            // The ShopUIManager might re-populate lists if stock changes or coins update.
-//            // For simplicity, this example doesn't force an immediate list refresh here,
-//            // assuming coin updates are handled by PlayerWallet events.
+//            _shopSystem.PlayerBuysItem(_item);
 //        }
-//        else // Sell Mode
+//    }
+
+//    private void HandleSellItem()
+//    {
+//        if (_item != null && _shopSystem != null)
 //        {
-//            // For now, always sell 1. You can add quantity selection later.
-//            bool sold = _shopSystemInstance.PlayerSellsItem(_currentItemData, 1);
-//            //if (sold)
-//            //{
-//            //    // Important: The sell list needs to be refreshed because item quantity changed or item removed.
-//            //    ShopUIManager.Instance?.ShowSellPanel(); // Re-calls PopulateSellList
-//            //}
+//            _shopSystem.PlayerSellsItem(_item);
 //        }
 //    }
 //}
+
+// File: ShopItemUIController.cs
+using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+
+public class ShopItemUIController : MonoBehaviour
+{
+    [Header("UI References")]
+    [SerializeField] private Image itemIcon;
+    [SerializeField] private TMP_Text itemNameText;
+    [SerializeField] private TMP_Text itemPriceText;
+    [SerializeField] private Button actionButton;
+    [SerializeField] private TMP_Text actionButtonText;
+
+    private ItemData currentItemData;
+    private ShopSystem currentShopSystem;
+
+    // Called when populating the BUY list
+    public void SetupBuyItem(ItemData itemData, ShopSystem shopSystem)
+    {
+        if (itemData == null || shopSystem == null) return;
+
+        currentItemData = itemData;
+        currentShopSystem = shopSystem;
+
+        // Update UI elements
+        itemIcon.sprite = currentItemData.itemIcon;
+        itemNameText.text = currentItemData.itemName;
+        itemPriceText.text = $"{currentItemData.buyPrice} Coins";
+        actionButtonText.text = "Buy";
+
+        // Assign the correct listener
+        actionButton.onClick.RemoveAllListeners();
+        actionButton.onClick.AddListener(OnBuyButtonClicked);
+    }
+
+    // Called when populating the SELL list
+    public void SetupSellItem(ItemData itemData, int quantity, ShopSystem shopSystem)
+    {
+        if (itemData == null || shopSystem == null) return;
+
+        currentItemData = itemData;
+        currentShopSystem = shopSystem;
+
+        // Update UI elements
+        itemIcon.sprite = currentItemData.itemIcon;
+        itemNameText.text = $"{currentItemData.itemName} (x{quantity})"; // Show quantity for selling
+        itemPriceText.text = $"{currentItemData.sellPrice} Coins";
+        actionButtonText.text = "Sell";
+
+        // Assign the correct listener
+        actionButton.onClick.RemoveAllListeners();
+        actionButton.onClick.AddListener(OnSellButtonClicked);
+    }
+
+    private void OnBuyButtonClicked()
+    {
+        if (currentItemData != null && currentShopSystem != null)
+        {
+            // The ShopSystem handles the logic and notifications
+            currentShopSystem.PlayerBuysItem(currentItemData, 1);
+        }
+    }
+
+    private void OnSellButtonClicked()
+    {
+        if (currentItemData != null && currentShopSystem != null)
+        {
+            // The ShopSystem handles the logic and notifications
+            bool sold = currentShopSystem.PlayerSellsItem(currentItemData, 1);
+            // If the item was successfully sold, this UI element will be destroyed and rebuilt
+            // when the ShopUIManager refreshes the sell panel.
+        }
+    }
+}

@@ -66,6 +66,14 @@ public class ItemData : ScriptableObject
     public bool canBeSold = true;
     public int sellPrice = 5;
 
-  
+    [Header("Upgrade Info")]
+    [Tooltip("The item this one will turn into when upgraded. Leave empty if not upgradable.")]
+    public ItemData nextLevelUpgrade;
+
+    [Tooltip("The cost in coins to perform the upgrade.")]
+    public int upgradeCost;
+
+    [Tooltip("A list of all materials and quantities needed for the upgrade.")]
+    public List<UpgradeRequirement> upgradeRequirements;
 }
 

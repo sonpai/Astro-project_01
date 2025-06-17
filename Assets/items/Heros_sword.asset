@@ -16,14 +16,15 @@ MonoBehaviour:
   itemName: sword
   itemIcon: {fileID: 21300000, guid: dd3631e297d7ef341bfc48751be7ca9d, type: 3}
   description: Item Description.
+  itemType: 0
   isStackable: 0
   maxStackSize: 1
   canBeBought: 0
   buyPrice: 10
   canBeSold: 0
   sellPrice: 5
-  nextLevelUpgrade: {fileID: 0}
-  upgradeCost: 50
+  nextLevelUpgrade: {fileID: 11400000, guid: 5f1a48dcafd69c94f828757fdd56c137, type: 2}
+  upgradeCost: 10
   upgradeRequirements:
   - requiredItem: {fileID: 11400000, guid: 175b2a8c99b11af4c8404855d3155eb0, type: 2}
     requiredQuantity: 5

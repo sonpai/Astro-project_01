@@ -771,6 +771,7 @@ public class UIInventoryPage : MonoBehaviour
 
     private void HandleItemSelection(UIInventoryItem item)
     {
+        Debug.LogError("hi selected!");
         DeselectAndReset();
         if (InventoryController.Instance.IsSlotEmpty(item.SlotIndex)) return;
 
@@ -785,6 +786,9 @@ public class UIInventoryPage : MonoBehaviour
 
     private void HandleBeginDrag(UIInventoryItem item)
     {
+
+        Debug.LogError("hi!");
+
         if (InventoryController.Instance.IsSlotEmpty(item.SlotIndex)) return;
         _currentlyDraggedItemIndex = item.SlotIndex;
         if (mouseFollower != null)
@@ -797,6 +801,7 @@ public class UIInventoryPage : MonoBehaviour
 
     private void HandleDrop(UIInventoryItem dropTargetItem)
     {
+
         if (_currentlyDraggedItemIndex == -1) return;
         InventoryController.Instance.SwapItems(_currentlyDraggedItemIndex, dropTargetItem.SlotIndex);
         HandleEndDrag(null);
@@ -824,3 +829,4 @@ public class UIInventoryPage : MonoBehaviour
         foreach (var item in listOfUIItems) item.Deselect();
     }
 }
+

@@ -436,4 +436,42 @@ public class ShopSystem : MonoBehaviour
             return false;
         }
     }
+
+    public bool PlayerSellsItemFromSlot(int slotIndex, int quantityToSell = 1)
+{
+    if (InventoryController.Instance == null)
+    {
+        Debug.LogError("ShopSystem: InventoryController instance not found!");
+        return false;
+    }
+
+    ItemData itemDataToSell = InventoryController.Instance.GetItemDataInSlot(slotIndex);
+    
+    if (itemDataToSell == null || quantityToSell <= 0)
+    {
+        ShopUIManager.Instance?.ShowNotification("Transaction Error!");
+        return false;
+    }
+
+    if (!itemDataToSell.canBeSold || itemDataToSell.sellPrice <= 0)
+    {
+        ShopUIManager.Instance?.ShowNotification($"{itemDataToSell.itemName} cannot be sold.");
+        return false;
+    }
+    
+    // Check if player has enough in that specific slot
+    if (InventoryController.Instance.GetQuantityInSlot(slotIndex) < quantityToSell)
+    {
+        ShopUIManager.Instance?.ShowNotification("Not enough items in this stack to sell.");
+        return false;
+    }
+
+    // Since we've confirmed everything, perform the transaction
+    int earnings = itemDataToSell.sellPrice * quantityToSell;
+    InventoryController.Instance.RemoveItemFromSlot(slotIndex, quantityToSell); // Remove from the specific slot
+    PlayerWallet.Instance.AddCoins(earnings);
+    ShopUIManager.Instance?.ShowNotification($"Sold {quantityToSell}x {itemDataToSell.itemName} for {earnings} coins!");
+    
+    return true;
+}
 }

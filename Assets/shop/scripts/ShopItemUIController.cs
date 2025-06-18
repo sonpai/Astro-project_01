@@ -79,6 +79,7 @@ public class ShopItemUIController : MonoBehaviour
 
     private ItemData currentItemData;
     private ShopSystem currentShopSystem;
+    private int itemSlotIndex;
 
     // Called when populating the BUY list
     public void SetupBuyItem(ItemData itemData, ShopSystem shopSystem)
@@ -100,20 +101,17 @@ public class ShopItemUIController : MonoBehaviour
     }
 
     // Called when populating the SELL list
-    public void SetupSellItem(ItemData itemData, int quantity, ShopSystem shopSystem)
+    public void SetupSellItem(ItemData itemData, int quantity, int slotIndex, ShopSystem shopSystem)
     {
-        if (itemData == null || shopSystem == null) return;
-
         currentItemData = itemData;
         currentShopSystem = shopSystem;
+        itemSlotIndex = slotIndex; // Store the original slot index
 
-        // Update UI elements
         itemIcon.sprite = currentItemData.itemIcon;
-        itemNameText.text = $"{currentItemData.itemName} (x{quantity})"; // Show quantity for selling
-        itemPriceText.text = $"{currentItemData.sellPrice} Coins";
+        itemNameText.text = $"{currentItemData.itemName} (x{quantity})";
+        itemPriceText.text = $"Sell for: {currentItemData.sellPrice} Coins";
         actionButtonText.text = "Sell";
 
-        // Assign the correct listener
         actionButton.onClick.RemoveAllListeners();
         actionButton.onClick.AddListener(OnSellButtonClicked);
     }
@@ -131,10 +129,11 @@ public class ShopItemUIController : MonoBehaviour
     {
         if (currentItemData != null && currentShopSystem != null)
         {
-            // The ShopSystem handles the logic and notifications
-            bool sold = currentShopSystem.PlayerSellsItem(currentItemData, 1);
-            // If the item was successfully sold, this UI element will be destroyed and rebuilt
-            // when the ShopUIManager refreshes the sell panel.
+            // Instead of selling by ItemData, we now sell from a specific slot.
+            // This prevents ambiguity if you have the same item in multiple stacks.
+            // We need to add a "PlayerSellsItemFromSlot" method to the ShopSystem.
+            currentShopSystem.PlayerSellsItemFromSlot(itemSlotIndex, 1);
         }
     }
+
 }
